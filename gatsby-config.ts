@@ -1,10 +1,16 @@
 module.exports = {
   siteMetadata: {
-    title: `Leon Pahole person website`,
+    title: `Leon Pahole personal website`,
     siteUrl: `https://www.leonpahole.com`,
   },
   plugins: [
-    "gatsby-plugin-sass",
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        additionalData: `@import "./src/styles/globals";`,
+      },
+    },
+    "gatsby-plugin-fontawesome-css",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",

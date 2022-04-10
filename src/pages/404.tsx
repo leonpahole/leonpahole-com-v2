@@ -1,12 +1,13 @@
+import Layout from "components/Layout/PageWrapper/PageWrapper";
+import NotFoundPage from "components/Page/NotFoundPage/NotFoundPage";
 import * as React from "react";
 
-function NotFoundPage() {
+function NotFound() {
   return (
-    <main>
-      <title>Not found</title>
-      <h1>Page not found</h1>
-    </main>
+    <Layout title="Not found">
+      <NotFoundPage />
+    </Layout>
   );
 }
 
-export default NotFoundPage;
+export default NotFound;

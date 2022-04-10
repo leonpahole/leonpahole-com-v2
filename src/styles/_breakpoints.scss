@@ -1,0 +1,24 @@
+$breakpoints: (
+  "micro": (
+    max-width: 767px
+  ),
+  "small": (
+    max-width: 500px
+  ),
+  "medium": (
+    max-width: 710px
+  ),
+  "large": (
+    max-width: 1200px
+  )
+) !default;
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
+    }
+  } @else {
+    @warn "Available breakpoints: #{map-keys($breakpoints)}.";
+  }
+}

@@ -1,16 +1,13 @@
+import HomePage from "components/Page/HomePage/HomePage";
+import Layout from "components/Layout/PageWrapper/PageWrapper";
 import * as React from "react";
-import Layout from "components/Layout/Layout";
-import Layout2 from "components/Layout2/Layout";
 
-function IndexPage() {
+function Home() {
   return (
-    <main>
-      <title>Home Page</title>
-      <h1 className="container">Congratulations</h1>
-      <Layout />
-      <Layout2 />
-    </main>
+    <Layout title="Home" showNavigation={false}>
+      <HomePage />
+    </Layout>
   );
 }
 
-export default IndexPage;
+export default Home;
