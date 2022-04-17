@@ -3,7 +3,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
 import "./about-page.scss";
 
-export default function AboutPage() {
+export const AboutPage = () => {
   return (
     <>
       <section id="introduction-section" className="about-me-section">
@@ -14,7 +14,7 @@ export default function AboutPage() {
             <StaticImage
               className="personal-image"
               alt="Leon Pahole"
-              src="../../images/LeonPahole.png"
+              src="../../../images/LeonPahole.png"
             />
           </div>
 
@@ -214,7 +214,7 @@ export default function AboutPage() {
                   Smart door implemented with computer vision on Arduino
                   platform
                 </i>
-                and is available for viewing
+                and is available for viewing{" "}
                 <Link
                   to="https://dk.um.si/IzpisGradiva.php?id=73626&lang=eng"
                   target="_blank"
@@ -330,7 +330,7 @@ export default function AboutPage() {
 
           <p>
             In 2019 I passed the B9lab Tezos smart contract developer course.
-            The certificate is available for viewing
+            The certificate is available for viewing{" "}
             <Link
               to="https://certificates.b9lab.com/certificate.html?uuid=569728a7-aee1-4031-b87e-13456a8dede5"
               target="_blank"
@@ -358,4 +358,4 @@ export default function AboutPage() {
       </section>
     </>
   );
-}
+};

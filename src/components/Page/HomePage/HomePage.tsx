@@ -11,13 +11,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "gatsby";
 
-export default function HomePage() {
+export const HomePage = () => {
   return (
     <section className="home-page-section">
       <StaticImage
         className="personal-image"
         alt="Leon Pahole"
-        src="../../images/LeonPahole.png"
+        src="../../../images/LeonPahole.png"
       />
 
       <div className="greeting-container">
@@ -87,4 +87,4 @@ export default function HomePage() {
       </div>
     </section>
   );
-}
+};

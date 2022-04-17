@@ -1,7 +1,7 @@
 import { Link } from "gatsby";
 import React from "react";
 
-export default function ContactPage() {
+export const ContactPage = () => {
   return (
     <>
       <h1 className="site-heading">Get in contact</h1>
@@ -13,17 +13,17 @@ export default function ContactPage() {
 
       <ul>
         <li>
-          <strong>E-mail</strong>:
+          <strong>E-mail</strong>:{" "}
           <a href="mailto:leon.pahole@gmail.com">leon.pahole@gmail.com</a>
         </li>
         <li>
-          <strong>GitHub</strong>:
+          <strong>GitHub</strong>:{" "}
           <Link to="https://github.com/leonpahole" target="_blank">
             leonpahole
           </Link>
         </li>
         <li>
-          <strong>GitLab</strong>:
+          <strong>GitLab</strong>:{" "}
           <Link to="https://gitlab.com/leonpahole" target="_blank">
             leonpahole
           </Link>
@@ -34,4 +34,4 @@ export default function ContactPage() {
       </ul>
     </>
   );
-}
+};

@@ -1,7 +1,7 @@
 import { Link } from "gatsby";
 import React from "react";
 
-export default function NotFoundPage() {
+export const NotFoundPage = () => {
   return (
     <>
       <h1 className="site-heading">Not found</h1>
@@ -11,4 +11,4 @@ export default function NotFoundPage() {
       <Link to="/">Back to home</Link>
     </>
   );
-}
+};

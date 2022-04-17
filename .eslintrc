@@ -14,6 +14,17 @@
     }
   },
   "rules": {
-    "react/require-default-props": "off"
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [".*"]
+      }
+    ],
+    "react/require-default-props": "off",
+    "react/function-component-definition": "off",
+    "arrow-body-style": "off",
+    "import/prefer-default-export": "off",
+    "react/prop-types": "off",
+    "no-plusplus": "off"
   }
 }
