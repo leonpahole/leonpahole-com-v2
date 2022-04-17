@@ -3,7 +3,9 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import { BlogPostList } from "components/blog/BlogPostList/BlogPostList";
 import { BlogModels } from "models/BlogPost";
-import { BlogIndexQuery } from "graphql-types";
+
+// eslint-disable-next-line no-restricted-imports
+import { BlogIndexQuery } from "../../graphql-types";
 
 interface IProps {
   data: BlogIndexQuery;

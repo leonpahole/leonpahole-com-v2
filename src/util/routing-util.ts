@@ -1,7 +1,13 @@
-import { GeneralUtil } from "util/general-util";
-
 export class RoutingUtil {
+  private static kebabCase(str: string) {
+    return str.split(" ").join("-").toLowerCase();
+  }
+
   static getCategoryLink(category: string) {
-    return `/blog/categories/${GeneralUtil.kebabCase(category)}`;
+    return `/blog/categories/${this.kebabCase(category)}`;
+  }
+
+  static getBlogPostLink(slug: string) {
+    return `/blog${slug}`;
   }
 }

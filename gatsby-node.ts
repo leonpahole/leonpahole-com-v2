@@ -1,20 +1,69 @@
-const path = require("path");
-const { GeneralUtil } = require("./src/util/general-util");
+/* eslint-disable no-restricted-imports */
+import type { CreatePagesArgs, GatsbyNode } from "gatsby";
+import path from "path";
+import { RoutingUtil } from "./src/util/routing-util";
 
-exports.createPages = async ({ actions, graphql, reporter }: any) => {
-  const { createPage } = actions;
-
-  const categoryTemplate = path.resolve("src/templates/category.tsx");
-  const result = await graphql(`
-    query CategoryIndex {
+const queryPageGeneratorData = async (graphql: CreatePagesArgs["graphql"]) => {
+  return graphql(`
+    query PageGeneratorIndex {
       allCategories: allMdx {
         group(field: frontmatter___categories) {
           fieldValue
           totalCount
         }
       }
+      allPosts: allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+        nodes {
+          fields {
+            slug
+          }
+        }
+      }
     }
   `);
+};
+
+const generateCategoriesPages = (
+  allCategories: { fieldValue: string }[],
+  actions: CreatePagesArgs["actions"]
+) => {
+  const categoryTemplate = path.resolve("src/templates/Categories.tsx");
+
+  // create category pages
+  allCategories.forEach((category) => {
+    actions.createPage({
+      path: RoutingUtil.getCategoryLink(category.fieldValue),
+      component: categoryTemplate,
+      context: {
+        category: category.fieldValue,
+      },
+    });
+  });
+};
+
+const generateBlogPostPages = (
+  allBlogPosts: { fields: { slug: string } }[],
+  actions: CreatePagesArgs["actions"]
+) => {
+  const blogPostTemplate = path.resolve("src/templates/BlogPost.tsx");
+  // create category pages
+  allBlogPosts.forEach((post) => {
+    actions.createPage({
+      path: RoutingUtil.getBlogPostLink(post.fields.slug),
+      component: blogPostTemplate,
+      context: {
+        slug: post.fields.slug,
+      },
+    });
+  });
+};
+
+export const createPages: GatsbyNode["createPages"] = async ({
+  actions,
+  graphql,
+  reporter,
+}) => {
+  const result = await queryPageGeneratorData(graphql);
 
   // handle errors
   if (result.errors) {
@@ -22,16 +71,6 @@ exports.createPages = async ({ actions, graphql, reporter }: any) => {
     return;
   }
 
-  const allCategories = result.data.allCategories.group;
-
-  // create category pages
-  allCategories.forEach((category: any) => {
-    createPage({
-      path: `/blog/categories/${GeneralUtil.kebabCase(category.fieldValue)}/`,
-      component: categoryTemplate,
-      context: {
-        category: category.fieldValue,
-      },
-    });
-  });
+  generateCategoriesPages((result.data as any).allCategories.group, actions);
+  generateBlogPostPages((result.data as any).allPosts.nodes, actions);
 };

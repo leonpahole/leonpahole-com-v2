@@ -1,5 +1,5 @@
 import React from "react";
-import "./home-page.scss";
+import "src/components/Page/HomePage/home-page.scss";
 import { StaticImage } from "gatsby-plugin-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

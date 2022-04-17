@@ -1,8 +1,8 @@
-import { BlogPostListItem } from "components/blog/BlogPostListItem/BlogPostListItem";
 import React from "react";
 import "src/components/blog/BlogPostList/blog-post-list.scss";
 import { BlogModels } from "models/BlogPost";
 import { GeneralUtil } from "util/general-util";
+import { BlogPostItem } from "components/blog/BlogPostItem/BlogPostItem";
 
 interface IProps {
   posts: BlogModels.BlogPost[];
@@ -32,7 +32,7 @@ export const BlogPostList: React.FC<IProps> = ({ posts, forCategory }) => {
       {heading}
 
       {posts.map((post) => (
-        <BlogPostListItem key={post.slug} post={post} />
+        <BlogPostItem key={post.slug} post={post} />
       ))}
     </section>
   );

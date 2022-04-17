@@ -1,7 +1,7 @@
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
-import "./about-page.scss";
+import "src/components/Page/AboutPage/about-page.scss";
 
 export const AboutPage = () => {
   return (

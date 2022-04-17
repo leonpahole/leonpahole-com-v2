@@ -1,8 +1,4 @@
 export class GeneralUtil {
-  public static kebabCase(str: string) {
-    return str.split(" ").join("-").toLowerCase();
-  }
-
   public static stringToColor(str: string): string {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {

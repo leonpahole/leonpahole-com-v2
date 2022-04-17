@@ -3,7 +3,9 @@ import { graphql } from "gatsby";
 import Layout from "components/Layout/PageWrapper/PageWrapper";
 import { BlogPostList } from "components/blog/BlogPostList/BlogPostList";
 import { BlogModels } from "models/BlogPost";
-import { CategoryIndexQuery } from "graphql-types";
+
+// eslint-disable-next-line no-restricted-imports
+import { CategoryIndexQuery } from "../../graphql-types";
 
 interface IProps {
   data: CategoryIndexQuery;
