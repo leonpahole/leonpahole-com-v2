@@ -1,6 +1,7 @@
 import { BlogPostCategories } from "components/blog/BlogPostCategories/BlogPostCategories";
+import { BlogPostItemCover } from "components/blog/BlogPostItemCover/BlogPostItemCover";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { BlogModels } from "models/BlogPost";
+import { BlogModels } from "models/blog-models";
 import React from "react";
 import "src/components/blog/BlogPostItem/blog-post-item.scss";
 import { RoutingUtil } from "util/routing-util";
@@ -16,16 +17,21 @@ export const BlogPostItem: React.FC<IProps> = ({ post }) => {
   return (
     <div className="blog-post-container">
       <div className="blog-post-header">
-        <h2 className="blog-post-title">
-          <a href={postLink}>{post.title}</a>
-        </h2>
-
-        <BlogPostCategories categories={post.categories} />
-
-        <span className="time-posted-on-text">Posted on {post.datePosted}</span>
-        <span className="time-posted-on-text">
-          Reading time: {post.readingTimeMinutes} min
-        </span>
+        {isSinglePageMode && <BlogPostItemCover post={post} />}
+        {!isSinglePageMode && (
+          <>
+            <h2 className="blog-post-title">
+              <a href={postLink}>{post.title}</a>
+            </h2>
+            <span className="time-posted-on-text">
+              Posted on: {post.datePosted}
+            </span>
+            <span className="time-posted-on-text">
+              Reading time: {post.readingTimeMinutes} min
+            </span>
+            <BlogPostCategories categories={post.categories} />
+          </>
+        )}
       </div>
 
       <div className="blog-post-body">
@@ -43,6 +49,18 @@ export const BlogPostItem: React.FC<IProps> = ({ post }) => {
           <>
             <hr />
             <MDXRenderer>{post.content!}</MDXRenderer>
+            {post.coverImage?.creditText && (
+              <p>
+                Cover image source:{" "}
+                <a
+                  href={post.coverImage.creditLink || "#"}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {post.coverImage.creditText}
+                </a>
+              </p>
+            )}
           </>
         )}
       </div>

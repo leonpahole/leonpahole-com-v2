@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { graphql } from "gatsby";
 import Layout from "components/Layout/PageWrapper/PageWrapper";
-import { BlogModels } from "models/BlogPost";
+import { BlogModels } from "models/blog-models";
 import { BlogPostItem } from "components/blog/BlogPostItem/BlogPostItem";
 
 // eslint-disable-next-line no-restricted-imports
@@ -30,6 +30,16 @@ export const blogPostQuery = graphql`
         title
         date(formatString: "MMMM D, YYYY")
         categories
+        cover_image {
+          alt
+          credit_link
+          credit_text
+          src {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
       }
       fields {
         slug

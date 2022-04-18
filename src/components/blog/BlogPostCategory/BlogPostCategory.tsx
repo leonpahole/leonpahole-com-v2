@@ -8,7 +8,7 @@ interface IProps {
 }
 
 export const BlogPostCategory: React.FC<IProps> = ({ category }) => {
-  const categoryLink = RoutingUtil.getCategoryLink(category);
+  const categoryLink = RoutingUtil.getCategoryLink(category, 1);
   const categoryColor = GeneralUtil.stringToColor(category);
 
   return (

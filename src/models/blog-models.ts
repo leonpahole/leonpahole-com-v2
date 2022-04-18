@@ -1,5 +1,7 @@
+import { getImage, IGatsbyImageData } from "gatsby-plugin-image";
+
 // eslint-disable-next-line no-restricted-imports
-import { BlogIndexQuery, BlogPostDetailsQuery } from "../../graphql-types";
+import { BlogListQuery, BlogPostDetailsQuery } from "../../graphql-types";
 
 export namespace BlogModels {
   export interface BlogPost {
@@ -10,9 +12,17 @@ export namespace BlogModels {
     excerpt: string;
     readingTimeMinutes: number;
     content: string | null | undefined;
+    coverImage: BlogPostCoverImage | null;
   }
 
-  type BlogIndexQueryItems = BlogIndexQuery["allBlogPosts"]["nodes"];
+  interface BlogPostCoverImage {
+    src: IGatsbyImageData;
+    alt: string;
+    creditText?: string | null;
+    creditLink?: string | null;
+  }
+
+  type BlogIndexQueryItems = BlogListQuery["allBlogPosts"]["nodes"];
   type BlogIndexQueryItem = BlogIndexQueryItems[number];
 
   type BlogPostDetailsQueryItem = BlogPostDetailsQuery["blogPostDetails"];
@@ -21,6 +31,17 @@ export namespace BlogModels {
     static toBlogPost(
       post: BlogIndexQueryItem | BlogPostDetailsQueryItem
     ): BlogPost {
+      let coverImage: BlogPostCoverImage | undefined | null = null;
+      if ((post!.frontmatter! as any).cover_image) {
+        const postDetailed = post as BlogPostDetailsQueryItem;
+        coverImage = {
+          src: getImage(postDetailed!.frontmatter!.cover_image!.src! as any)!,
+          alt: postDetailed!.frontmatter!.cover_image!.alt!,
+          creditText: postDetailed!.frontmatter!.cover_image!.credit_text,
+          creditLink: postDetailed!.frontmatter!.cover_image!.credit_link,
+        };
+      }
+
       return {
         title: post!.frontmatter!.title,
         slug: post!.fields!.slug!,
@@ -29,6 +50,7 @@ export namespace BlogModels {
         excerpt: post!.excerpt,
         readingTimeMinutes: post!.timeToRead!,
         content: (post as BlogPostDetailsQueryItem)?.body,
+        coverImage,
       };
     }
 

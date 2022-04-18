@@ -1,0 +1,14 @@
+.pager {
+  display: flex;
+  justify-content: space-between;
+
+  .previous {
+    flex: 1;
+    text-align: start;
+  }
+
+  .next {
+    flex: 1;
+    text-align: end;
+  }
+}

@@ -359,6 +359,7 @@ export type MdxFrontmatter = {
   categories?: Maybe<Array<Maybe<Scalars['String']>>>;
   date?: Maybe<Scalars['Date']>;
   slug?: Maybe<Scalars['String']>;
+  cover_image?: Maybe<MdxFrontmatterCover_Image>;
 };
 
 
@@ -367,6 +368,13 @@ export type MdxFrontmatterDateArgs = {
   fromNow?: InputMaybe<Scalars['Boolean']>;
   difference?: InputMaybe<Scalars['String']>;
   locale?: InputMaybe<Scalars['String']>;
+};
+
+export type MdxFrontmatterCover_Image = {
+  src?: Maybe<File>;
+  alt?: Maybe<Scalars['String']>;
+  credit_text?: Maybe<Scalars['String']>;
+  credit_link?: Maybe<Scalars['String']>;
 };
 
 export type MdxHeadingMdx = {
@@ -1279,63 +1287,59 @@ export type MdxFrontmatterFilterInput = {
   categories?: InputMaybe<StringQueryOperatorInput>;
   date?: InputMaybe<DateQueryOperatorInput>;
   slug?: InputMaybe<StringQueryOperatorInput>;
+  cover_image?: InputMaybe<MdxFrontmatterCover_ImageFilterInput>;
 };
 
-export type MdxHeadingMdxFilterListInput = {
-  elemMatch?: InputMaybe<MdxHeadingMdxFilterInput>;
+export type MdxFrontmatterCover_ImageFilterInput = {
+  src?: InputMaybe<FileFilterInput>;
+  alt?: InputMaybe<StringQueryOperatorInput>;
+  credit_text?: InputMaybe<StringQueryOperatorInput>;
+  credit_link?: InputMaybe<StringQueryOperatorInput>;
 };
 
-export type MdxHeadingMdxFilterInput = {
-  value?: InputMaybe<StringQueryOperatorInput>;
-  depth?: InputMaybe<IntQueryOperatorInput>;
-};
-
-export type JsonQueryOperatorInput = {
-  eq?: InputMaybe<Scalars['JSON']>;
-  ne?: InputMaybe<Scalars['JSON']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
-  nin?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
-  regex?: InputMaybe<Scalars['JSON']>;
-  glob?: InputMaybe<Scalars['JSON']>;
-};
-
-export type MdxWordCountFilterInput = {
-  paragraphs?: InputMaybe<IntQueryOperatorInput>;
-  sentences?: InputMaybe<IntQueryOperatorInput>;
-  words?: InputMaybe<IntQueryOperatorInput>;
-};
-
-export type MdxFieldsFilterInput = {
-  slug?: InputMaybe<StringQueryOperatorInput>;
-};
-
-export type NodeFilterInput = {
+export type FileFilterInput = {
+  sourceInstanceName?: InputMaybe<StringQueryOperatorInput>;
+  absolutePath?: InputMaybe<StringQueryOperatorInput>;
+  relativePath?: InputMaybe<StringQueryOperatorInput>;
+  extension?: InputMaybe<StringQueryOperatorInput>;
+  size?: InputMaybe<IntQueryOperatorInput>;
+  prettySize?: InputMaybe<StringQueryOperatorInput>;
+  modifiedTime?: InputMaybe<DateQueryOperatorInput>;
+  accessTime?: InputMaybe<DateQueryOperatorInput>;
+  changeTime?: InputMaybe<DateQueryOperatorInput>;
+  birthTime?: InputMaybe<DateQueryOperatorInput>;
+  root?: InputMaybe<StringQueryOperatorInput>;
+  dir?: InputMaybe<StringQueryOperatorInput>;
+  base?: InputMaybe<StringQueryOperatorInput>;
+  ext?: InputMaybe<StringQueryOperatorInput>;
+  name?: InputMaybe<StringQueryOperatorInput>;
+  relativeDirectory?: InputMaybe<StringQueryOperatorInput>;
+  dev?: InputMaybe<IntQueryOperatorInput>;
+  mode?: InputMaybe<IntQueryOperatorInput>;
+  nlink?: InputMaybe<IntQueryOperatorInput>;
+  uid?: InputMaybe<IntQueryOperatorInput>;
+  gid?: InputMaybe<IntQueryOperatorInput>;
+  rdev?: InputMaybe<IntQueryOperatorInput>;
+  ino?: InputMaybe<FloatQueryOperatorInput>;
+  atimeMs?: InputMaybe<FloatQueryOperatorInput>;
+  mtimeMs?: InputMaybe<FloatQueryOperatorInput>;
+  ctimeMs?: InputMaybe<FloatQueryOperatorInput>;
+  atime?: InputMaybe<DateQueryOperatorInput>;
+  mtime?: InputMaybe<DateQueryOperatorInput>;
+  ctime?: InputMaybe<DateQueryOperatorInput>;
+  birthtime?: InputMaybe<DateQueryOperatorInput>;
+  birthtimeMs?: InputMaybe<FloatQueryOperatorInput>;
+  blksize?: InputMaybe<IntQueryOperatorInput>;
+  blocks?: InputMaybe<IntQueryOperatorInput>;
+  publicURL?: InputMaybe<StringQueryOperatorInput>;
+  childrenMdx?: InputMaybe<MdxFilterListInput>;
+  childMdx?: InputMaybe<MdxFilterInput>;
+  childrenImageSharp?: InputMaybe<ImageSharpFilterListInput>;
+  childImageSharp?: InputMaybe<ImageSharpFilterInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
   internal?: InputMaybe<InternalFilterInput>;
-};
-
-export type NodeFilterListInput = {
-  elemMatch?: InputMaybe<NodeFilterInput>;
-};
-
-export type InternalFilterInput = {
-  content?: InputMaybe<StringQueryOperatorInput>;
-  contentDigest?: InputMaybe<StringQueryOperatorInput>;
-  description?: InputMaybe<StringQueryOperatorInput>;
-  fieldOwners?: InputMaybe<StringQueryOperatorInput>;
-  ignoreType?: InputMaybe<BooleanQueryOperatorInput>;
-  mediaType?: InputMaybe<StringQueryOperatorInput>;
-  owner?: InputMaybe<StringQueryOperatorInput>;
-  type?: InputMaybe<StringQueryOperatorInput>;
-};
-
-export type BooleanQueryOperatorInput = {
-  eq?: InputMaybe<Scalars['Boolean']>;
-  ne?: InputMaybe<Scalars['Boolean']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
-  nin?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
 };
 
 export type ImageSharpFilterListInput = {
@@ -1382,6 +1386,15 @@ export type ImageSharpFluidFilterInput = {
   presentationHeight?: InputMaybe<IntQueryOperatorInput>;
 };
 
+export type JsonQueryOperatorInput = {
+  eq?: InputMaybe<Scalars['JSON']>;
+  ne?: InputMaybe<Scalars['JSON']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
+  nin?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
+  regex?: InputMaybe<Scalars['JSON']>;
+  glob?: InputMaybe<Scalars['JSON']>;
+};
+
 export type ImageSharpOriginalFilterInput = {
   width?: InputMaybe<FloatQueryOperatorInput>;
   height?: InputMaybe<FloatQueryOperatorInput>;
@@ -1395,6 +1408,54 @@ export type ImageSharpResizeFilterInput = {
   height?: InputMaybe<IntQueryOperatorInput>;
   aspectRatio?: InputMaybe<FloatQueryOperatorInput>;
   originalName?: InputMaybe<StringQueryOperatorInput>;
+};
+
+export type NodeFilterInput = {
+  id?: InputMaybe<StringQueryOperatorInput>;
+  parent?: InputMaybe<NodeFilterInput>;
+  children?: InputMaybe<NodeFilterListInput>;
+  internal?: InputMaybe<InternalFilterInput>;
+};
+
+export type NodeFilterListInput = {
+  elemMatch?: InputMaybe<NodeFilterInput>;
+};
+
+export type InternalFilterInput = {
+  content?: InputMaybe<StringQueryOperatorInput>;
+  contentDigest?: InputMaybe<StringQueryOperatorInput>;
+  description?: InputMaybe<StringQueryOperatorInput>;
+  fieldOwners?: InputMaybe<StringQueryOperatorInput>;
+  ignoreType?: InputMaybe<BooleanQueryOperatorInput>;
+  mediaType?: InputMaybe<StringQueryOperatorInput>;
+  owner?: InputMaybe<StringQueryOperatorInput>;
+  type?: InputMaybe<StringQueryOperatorInput>;
+};
+
+export type BooleanQueryOperatorInput = {
+  eq?: InputMaybe<Scalars['Boolean']>;
+  ne?: InputMaybe<Scalars['Boolean']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
+  nin?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
+};
+
+export type MdxHeadingMdxFilterListInput = {
+  elemMatch?: InputMaybe<MdxHeadingMdxFilterInput>;
+};
+
+export type MdxHeadingMdxFilterInput = {
+  value?: InputMaybe<StringQueryOperatorInput>;
+  depth?: InputMaybe<IntQueryOperatorInput>;
+};
+
+export type MdxWordCountFilterInput = {
+  paragraphs?: InputMaybe<IntQueryOperatorInput>;
+  sentences?: InputMaybe<IntQueryOperatorInput>;
+  words?: InputMaybe<IntQueryOperatorInput>;
+};
+
+export type MdxFieldsFilterInput = {
+  slug?: InputMaybe<StringQueryOperatorInput>;
 };
 
 export type FileConnection = {
@@ -1496,6 +1557,9 @@ export type FileFieldsEnum =
   | 'childrenMdx___frontmatter___categories'
   | 'childrenMdx___frontmatter___date'
   | 'childrenMdx___frontmatter___slug'
+  | 'childrenMdx___frontmatter___cover_image___alt'
+  | 'childrenMdx___frontmatter___cover_image___credit_text'
+  | 'childrenMdx___frontmatter___cover_image___credit_link'
   | 'childrenMdx___slug'
   | 'childrenMdx___body'
   | 'childrenMdx___excerpt'
@@ -1556,6 +1620,9 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___categories'
   | 'childMdx___frontmatter___date'
   | 'childMdx___frontmatter___slug'
+  | 'childMdx___frontmatter___cover_image___alt'
+  | 'childMdx___frontmatter___cover_image___credit_text'
+  | 'childMdx___frontmatter___cover_image___credit_link'
   | 'childMdx___slug'
   | 'childMdx___body'
   | 'childMdx___excerpt'
@@ -1875,51 +1942,6 @@ export type FileGroupConnectionGroupArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   limit?: InputMaybe<Scalars['Int']>;
   field: FileFieldsEnum;
-};
-
-export type FileFilterInput = {
-  sourceInstanceName?: InputMaybe<StringQueryOperatorInput>;
-  absolutePath?: InputMaybe<StringQueryOperatorInput>;
-  relativePath?: InputMaybe<StringQueryOperatorInput>;
-  extension?: InputMaybe<StringQueryOperatorInput>;
-  size?: InputMaybe<IntQueryOperatorInput>;
-  prettySize?: InputMaybe<StringQueryOperatorInput>;
-  modifiedTime?: InputMaybe<DateQueryOperatorInput>;
-  accessTime?: InputMaybe<DateQueryOperatorInput>;
-  changeTime?: InputMaybe<DateQueryOperatorInput>;
-  birthTime?: InputMaybe<DateQueryOperatorInput>;
-  root?: InputMaybe<StringQueryOperatorInput>;
-  dir?: InputMaybe<StringQueryOperatorInput>;
-  base?: InputMaybe<StringQueryOperatorInput>;
-  ext?: InputMaybe<StringQueryOperatorInput>;
-  name?: InputMaybe<StringQueryOperatorInput>;
-  relativeDirectory?: InputMaybe<StringQueryOperatorInput>;
-  dev?: InputMaybe<IntQueryOperatorInput>;
-  mode?: InputMaybe<IntQueryOperatorInput>;
-  nlink?: InputMaybe<IntQueryOperatorInput>;
-  uid?: InputMaybe<IntQueryOperatorInput>;
-  gid?: InputMaybe<IntQueryOperatorInput>;
-  rdev?: InputMaybe<IntQueryOperatorInput>;
-  ino?: InputMaybe<FloatQueryOperatorInput>;
-  atimeMs?: InputMaybe<FloatQueryOperatorInput>;
-  mtimeMs?: InputMaybe<FloatQueryOperatorInput>;
-  ctimeMs?: InputMaybe<FloatQueryOperatorInput>;
-  atime?: InputMaybe<DateQueryOperatorInput>;
-  mtime?: InputMaybe<DateQueryOperatorInput>;
-  ctime?: InputMaybe<DateQueryOperatorInput>;
-  birthtime?: InputMaybe<DateQueryOperatorInput>;
-  birthtimeMs?: InputMaybe<FloatQueryOperatorInput>;
-  blksize?: InputMaybe<IntQueryOperatorInput>;
-  blocks?: InputMaybe<IntQueryOperatorInput>;
-  publicURL?: InputMaybe<StringQueryOperatorInput>;
-  childrenMdx?: InputMaybe<MdxFilterListInput>;
-  childMdx?: InputMaybe<MdxFilterInput>;
-  childrenImageSharp?: InputMaybe<ImageSharpFilterListInput>;
-  childImageSharp?: InputMaybe<ImageSharpFilterInput>;
-  id?: InputMaybe<StringQueryOperatorInput>;
-  parent?: InputMaybe<NodeFilterInput>;
-  children?: InputMaybe<NodeFilterListInput>;
-  internal?: InputMaybe<InternalFilterInput>;
 };
 
 export type FileSortInput = {
@@ -3281,6 +3303,47 @@ export type MdxFieldsEnum =
   | 'frontmatter___categories'
   | 'frontmatter___date'
   | 'frontmatter___slug'
+  | 'frontmatter___cover_image___src___sourceInstanceName'
+  | 'frontmatter___cover_image___src___absolutePath'
+  | 'frontmatter___cover_image___src___relativePath'
+  | 'frontmatter___cover_image___src___extension'
+  | 'frontmatter___cover_image___src___size'
+  | 'frontmatter___cover_image___src___prettySize'
+  | 'frontmatter___cover_image___src___modifiedTime'
+  | 'frontmatter___cover_image___src___accessTime'
+  | 'frontmatter___cover_image___src___changeTime'
+  | 'frontmatter___cover_image___src___birthTime'
+  | 'frontmatter___cover_image___src___root'
+  | 'frontmatter___cover_image___src___dir'
+  | 'frontmatter___cover_image___src___base'
+  | 'frontmatter___cover_image___src___ext'
+  | 'frontmatter___cover_image___src___name'
+  | 'frontmatter___cover_image___src___relativeDirectory'
+  | 'frontmatter___cover_image___src___dev'
+  | 'frontmatter___cover_image___src___mode'
+  | 'frontmatter___cover_image___src___nlink'
+  | 'frontmatter___cover_image___src___uid'
+  | 'frontmatter___cover_image___src___gid'
+  | 'frontmatter___cover_image___src___rdev'
+  | 'frontmatter___cover_image___src___ino'
+  | 'frontmatter___cover_image___src___atimeMs'
+  | 'frontmatter___cover_image___src___mtimeMs'
+  | 'frontmatter___cover_image___src___ctimeMs'
+  | 'frontmatter___cover_image___src___atime'
+  | 'frontmatter___cover_image___src___mtime'
+  | 'frontmatter___cover_image___src___ctime'
+  | 'frontmatter___cover_image___src___birthtime'
+  | 'frontmatter___cover_image___src___birthtimeMs'
+  | 'frontmatter___cover_image___src___blksize'
+  | 'frontmatter___cover_image___src___blocks'
+  | 'frontmatter___cover_image___src___publicURL'
+  | 'frontmatter___cover_image___src___childrenMdx'
+  | 'frontmatter___cover_image___src___childrenImageSharp'
+  | 'frontmatter___cover_image___src___id'
+  | 'frontmatter___cover_image___src___children'
+  | 'frontmatter___cover_image___alt'
+  | 'frontmatter___cover_image___credit_text'
+  | 'frontmatter___cover_image___credit_link'
   | 'slug'
   | 'body'
   | 'excerpt'
@@ -4112,20 +4175,25 @@ export type StaticImageSortInput = {
   order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
 };
 
-export type BlogIndexQueryVariables = Exact<{ [key: string]: never; }>;
+export type BlogListQueryVariables = Exact<{
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
+}>;
 
 
-export type BlogIndexQuery = { allBlogPosts: { nodes: Array<{ timeToRead?: number | null, excerpt: string, frontmatter?: { title: string, date?: any | null, categories?: Array<string | null> | null } | null, fields?: { slug?: string | null } | null }> } };
+export type BlogListQuery = { allBlogPosts: { nodes: Array<{ timeToRead?: number | null, excerpt: string, frontmatter?: { title: string, date?: any | null, categories?: Array<string | null> | null } | null, fields?: { slug?: string | null } | null }> } };
 
 export type BlogPostDetailsQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type BlogPostDetailsQuery = { blogPostDetails?: { timeToRead?: number | null, excerpt: string, body: string, frontmatter?: { title: string, date?: any | null, categories?: Array<string | null> | null } | null, fields?: { slug?: string | null } | null } | null };
+export type BlogPostDetailsQuery = { blogPostDetails?: { timeToRead?: number | null, excerpt: string, body: string, frontmatter?: { title: string, date?: any | null, categories?: Array<string | null> | null, cover_image?: { alt?: string | null, credit_link?: string | null, credit_text?: string | null, src?: { childImageSharp?: { gatsbyImageData: any } | null } | null } | null } | null, fields?: { slug?: string | null } | null } | null };
 
 export type CategoryIndexQueryVariables = Exact<{
   category?: InputMaybe<Scalars['String']>;
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
 }>;
 
 

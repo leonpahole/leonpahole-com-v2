@@ -6,6 +6,11 @@ categories:
   - "Traefik"
 date: "2020-11-07"
 slug: traefik-ip-whitelist
+cover_image:
+  src: "../../assets/covers/traefik-cover.png"
+  alt: "Traefik"
+  credit_text: "https://doc.traefik.io/traefik/"
+  credit_link: "https://doc.traefik.io/traefik/"
 ---
 
 Security is an important consideration when building web based systems. A big part of this is giving access to critical resources to as few people as possible. For example, a lot of brute force attacks can be prevented if we limit SSH access to our server to only a handful of IP addresses (for instance, our VPN server and our office IP addresses). Same applies to dashboards and admin interfaces, such as database admin panels (pgAdmin, phpMyAdmin, Mongo express and others). If you use Traefik as your gateway to these dashboards, you can specify IP whitelists to give access to specific IP addresses or ranges. Let's look at how to do this.

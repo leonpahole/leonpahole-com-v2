@@ -6,6 +6,11 @@ categories:
   - "Traefik"
 date: "2020-05-02"
 slug: traefik-basic-setup
+cover_image:
+  src: "../../assets/covers/traefik-cover.png"
+  alt: "Traefik"
+  credit_text: "https://doc.traefik.io/traefik/"
+  credit_link: "https://doc.traefik.io/traefik/"
 ---
 
 When I started deploying my apps on actual servers, I always had a problem with the global architecture of the server: I had a lot of Docker containers, which needed to be connected to the internet. But, because only one port 80 and 443 can be exposed on a single server (I don't recommend exposing any other ports, rather connect services to a domain and create a virtual host - e. g. your API running on port 3000 should be proxied to with a domain `api.example.com`), I had to create a separate Nginx container to proxy all requests from the internet to my containers. This was annoying as I had to constantly modify my Nginx configuration files and generate Let's encrypt certificates manually or use additional containers to do the automation (like [`docker-letsencrypt-nginx-proxy-companion`](https://github.com/nginx-proxy/docker-letsencrypt-nginx-proxy-companion){:target="\_blank"}).

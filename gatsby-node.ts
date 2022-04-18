@@ -3,6 +3,8 @@ import type { CreatePagesArgs, GatsbyNode } from "gatsby";
 import path from "path";
 import { RoutingUtil } from "./src/util/routing-util";
 
+const BlogPostsPerPage = 10;
+
 const queryPageGeneratorData = async (graphql: CreatePagesArgs["graphql"]) => {
   return graphql(`
     query PageGeneratorIndex {
@@ -23,21 +25,38 @@ const queryPageGeneratorData = async (graphql: CreatePagesArgs["graphql"]) => {
   `);
 };
 
-const generateCategoriesPages = (
-  allCategories: { fieldValue: string }[],
+type GroupedCategory = { fieldValue: string; totalCount: number };
+
+const generatePaginatedCategoryPage = (
+  category: GroupedCategory,
   actions: CreatePagesArgs["actions"]
 ) => {
   const categoryTemplate = path.resolve("src/templates/Categories.tsx");
 
-  // create category pages
-  allCategories.forEach((category) => {
+  const numPages = Math.ceil(category.totalCount / BlogPostsPerPage);
+
+  Array.from({ length: numPages }).forEach((_, pageNumber) => {
     actions.createPage({
-      path: RoutingUtil.getCategoryLink(category.fieldValue),
+      path: RoutingUtil.getCategoryLink(category.fieldValue, pageNumber + 1),
       component: categoryTemplate,
       context: {
+        limit: BlogPostsPerPage,
+        skip: pageNumber * BlogPostsPerPage,
+        numPages,
+        currentPage: pageNumber + 1,
         category: category.fieldValue,
       },
     });
+  });
+};
+
+const generatePaginatedCategoriesPages = (
+  allCategories: GroupedCategory[],
+  actions: CreatePagesArgs["actions"]
+) => {
+  // create category pages
+  allCategories.forEach((category) => {
+    generatePaginatedCategoryPage(category, actions);
   });
 };
 
@@ -46,13 +65,35 @@ const generateBlogPostPages = (
   actions: CreatePagesArgs["actions"]
 ) => {
   const blogPostTemplate = path.resolve("src/templates/BlogPost.tsx");
-  // create category pages
+
   allBlogPosts.forEach((post) => {
     actions.createPage({
       path: RoutingUtil.getBlogPostLink(post.fields.slug),
       component: blogPostTemplate,
       context: {
         slug: post.fields.slug,
+      },
+    });
+  });
+};
+
+const generatePaginatedBlogListPages = (
+  allBlogPosts: { fields: { slug: string } }[],
+  actions: CreatePagesArgs["actions"]
+) => {
+  const blogListTemplate = path.resolve("src/templates/BlogList.tsx");
+
+  const numPages = Math.ceil(allBlogPosts.length / BlogPostsPerPage);
+
+  Array.from({ length: numPages }).forEach((_, pageNumber) => {
+    actions.createPage({
+      path: RoutingUtil.getBlogListLink(pageNumber + 1),
+      component: blogListTemplate,
+      context: {
+        limit: BlogPostsPerPage,
+        skip: pageNumber * BlogPostsPerPage,
+        numPages,
+        currentPage: pageNumber + 1,
       },
     });
   });
@@ -71,6 +112,10 @@ export const createPages: GatsbyNode["createPages"] = async ({
     return;
   }
 
-  generateCategoriesPages((result.data as any).allCategories.group, actions);
+  generatePaginatedCategoriesPages(
+    (result.data as any).allCategories.group,
+    actions
+  );
   generateBlogPostPages((result.data as any).allPosts.nodes, actions);
+  generatePaginatedBlogListPages((result.data as any).allPosts.nodes, actions);
 };
