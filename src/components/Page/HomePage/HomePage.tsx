@@ -23,7 +23,7 @@ export const HomePage = () => {
       <div className="greeting-container">
         <h1 className="greeting-title">Hi, I&apos;m Leon Pahole</h1>
         <h2 className="greeting-subtitle">
-          Software developer &bull; computer science student
+          Web developer &bull; computer science student
         </h2>
       </div>
 
