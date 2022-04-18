@@ -13,7 +13,7 @@ cover_image:
   credit_link: "https://doc.traefik.io/traefik/"
 ---
 
-If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}){:target="\_blank"}. This blog post assumes you have this setup ready:
+If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}). This blog post assumes you have this setup ready:
 
 - HTTP to HTTPS redirect,
 - automated Let's encrypt certificates,
@@ -43,7 +43,7 @@ networks:
     external: true
 ```
 
-Note that we connect the proxy to external network, created by Traefik (we did that in the [previous blog post]({% post_url 2020-05-02-traefik-basic-setup %}){:target="\_blank"}). If you have multiple services in your docker compose file, you should only put containers, that need to be exposed through the proxy, in this network, and define another internal network for internal container communication.
+Note that we connect the proxy to external network, created by Traefik (we did that in the [previous blog post]({% post_url 2020-05-02-traefik-basic-setup %})). If you have multiple services in your docker compose file, you should only put containers, that need to be exposed through the proxy, in this network, and define another internal network for internal container communication.
 
 As a side node, you need to name each of your routers differently. Here I named the router, associated with this container, "nginx" (denoted by `traefik.http.routers.nginx`). If you have another container you wanted to connect (you probably do), you should name it something else to prevent conflicts with this container.
 
@@ -67,5 +67,5 @@ Check out my other examples of Traefik usage, if you are interested:
 
 ## Resources
 
-- Traefik docs: [https://docs.traefik.io/](https://docs.traefik.io/){:target="\_blank"}
-- Docker provider for Traefik: [https://docs.traefik.io/providers/docker/](https://docs.traefik.io/providers/docker/){:target="\_blank"}
+- Traefik docs: [https://docs.traefik.io/](https://docs.traefik.io/)
+- Docker provider for Traefik: [https://docs.traefik.io/providers/docker/](https://docs.traefik.io/providers/docker/)

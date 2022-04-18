@@ -2,6 +2,7 @@ import { BlogPostCategories } from "components/blog/BlogPostCategories/BlogPostC
 import { BlogPostItemCover } from "components/blog/BlogPostItemCover/BlogPostItemCover";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { BlogModels } from "models/blog-models";
+import { AppMDXProvider } from "providers/AppMDXProvider";
 import React from "react";
 import "src/components/blog/BlogPostItem/blog-post-item.scss";
 import { RoutingUtil } from "util/routing-util";
@@ -48,7 +49,9 @@ export const BlogPostItem: React.FC<IProps> = ({ post }) => {
         {isSinglePageMode && (
           <>
             <hr />
-            <MDXRenderer>{post.content!}</MDXRenderer>
+            <AppMDXProvider>
+              <MDXRenderer>{post.content!}</MDXRenderer>
+            </AppMDXProvider>
             {post.coverImage?.creditText && (
               <p>
                 Cover image source:{" "}

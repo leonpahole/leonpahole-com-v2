@@ -15,7 +15,7 @@ cover_image:
 
 If you had asked me one week ago what the advantage of using the MongoDB database was, I would have told you: _because it is flexible and schemaless_. But is this really the answer? What does _flexible_ mean? What advantage would it bring to our product?
 
-Recently I started working on a new application and decided to use MongoDB as the database. I designed my data model identically to the one I would design if working with a relational database, such as PostgreSQL. However, after watching some data modelling videos and taking a course at the [MongoDB university](https://university.mongodb.com/){:target="\_blank"}, I realized that I have been missing on a lot of things that MongoDB really has to offer.
+Recently I started working on a new application and decided to use MongoDB as the database. I designed my data model identically to the one I would design if working with a relational database, such as PostgreSQL. However, after watching some data modelling videos and taking a course at the [MongoDB university](https://university.mongodb.com/), I realized that I have been missing on a lot of things that MongoDB really has to offer.
 
 In order to design a good data model in MongoDB, I had to make a _context switch_ from the relational world to the world of NoSQL.
 
@@ -107,7 +107,7 @@ Some concerns of using patterns:
 
 - **Referential integrity** eg. deleting, but not deleting the reference.
 
-Let's look at some data modelling patterns (all of them are explained in great detail [here](https://www.mongodb.com/blog/post/building-with-patterns-a-summary){:target="\_blank"}):
+Let's look at some data modelling patterns (all of them are explained in great detail [here](https://www.mongodb.com/blog/post/building-with-patterns-a-summary)):
 
 #### Attribute pattern
 
@@ -176,7 +176,7 @@ Here are the optimizations we can apply using MongoDB:
 - apply _subset pattern_ and embed last 10 comments of the post in the post itself, while storing all other comments in a separate document. Since comments are really never seen by themselves (on a separate page), we can just embed them. This will allow us to load the first 10 comments of the post without joining the data at all.
 - apply _bucket pattern_ on comments - store 100 comments of the post in a separate document, and then next 100 comments in another separate document. This allows us to avoid 16MB limit on the document size and it can help improve pagination (eg. if we need comments 210 - 220, we know in which document we need to look - of course we should store _post_id_, _start_comment_number_ and _end_comment_number_ in the document).
 
-Interesting note: bucket pattern can be applied easily using the upsert operation [reference](https://www.mongodb.com/blog/post/paging-with-the-bucket-pattern--part-2){:target="\_blank"}:
+Interesting note: bucket pattern can be applied easily using the upsert operation [reference](https://www.mongodb.com/blog/post/paging-with-the-bucket-pattern--part-2):
 
 ```js
 db.history.updateOne(
@@ -208,7 +208,7 @@ There is no set recipe, but we can look at some options:
 1. Integration - if we have an existing piece of technology that we want to use, it may be a good idea to choose a database that can directly integrate with that technology.
 2. Scaling - research which systems support distributed databases.
 3. Support - how much (paid) support does the company behind the database provide?
-4. [CAP principle](https://blog.nahurst.com/visual-guide-to-nosql-systems){:target="\_blank"} - consistency (read/write from any node and get the same data), availability (ability to access the cluster even if one node goes down) and partition tolerance (cluster functions even if a communication break between two nodes happens).
+4. [CAP principle](https://blog.nahurst.com/visual-guide-to-nosql-systems) - consistency (read/write from any node and get the same data), availability (ability to access the cluster even if one node goes down) and partition tolerance (cluster functions even if a communication break between two nodes happens).
 5. Simplicity! Don't complicate it if you don't need to.
    <p></p>
 
@@ -218,10 +218,10 @@ Hopefully this gives you an idea of how MongoDB can speed up your application. D
 
 ## Resources
 
-- Mongo university: [https://university.mongodb.com/](https://university.mongodb.com/){:target="\_blank"}
-- Great talk by Joe Karlsson regarding data modelling: [https://www.joekarlsson.com/2020/04/mongodb-schema-design-best-practices/](https://www.joekarlsson.com/2020/04/mongodb-schema-design-best-practices/){:target="\_blank"}
-- Data modelling patterns: [https://www.mongodb.com/blog/post/building-with-patterns-a-summary](https://www.mongodb.com/blog/post/building-with-patterns-a-summary){:target="\_blank"}
-- Great talk about advanced schema design patterns [https://www.youtube.com/watch?v=bxw1AkH2aM4](https://www.youtube.com/watch?v=bxw1AkH2aM4){:target="\_blank"}
-- Comparison of PostgreSQL and MongoDB [https://www.youtube.com/watch?v=eM7hzKwvTq8](https://www.youtube.com/watch?v=eM7hzKwvTq8){:target="\_blank"}
-- How to Choose the Right Database? [https://www.youtube.com/watch?v=v5e_PasMdXc](https://www.youtube.com/watch?v=v5e_PasMdXc){:target="\_blank"}
-- Visual Guide to NoSQL Systems [https://blog.nahurst.com/visual-guide-to-nosql-systems](https://blog.nahurst.com/visual-guide-to-nosql-systems){:target="\_blank"}
+- Mongo university: [https://university.mongodb.com/](https://university.mongodb.com/)
+- Great talk by Joe Karlsson regarding data modelling: [https://www.joekarlsson.com/2020/04/mongodb-schema-design-best-practices/](https://www.joekarlsson.com/2020/04/mongodb-schema-design-best-practices/)
+- Data modelling patterns: [https://www.mongodb.com/blog/post/building-with-patterns-a-summary](https://www.mongodb.com/blog/post/building-with-patterns-a-summary)
+- Great talk about advanced schema design patterns [https://www.youtube.com/watch?v=bxw1AkH2aM4](https://www.youtube.com/watch?v=bxw1AkH2aM4)
+- Comparison of PostgreSQL and MongoDB [https://www.youtube.com/watch?v=eM7hzKwvTq8](https://www.youtube.com/watch?v=eM7hzKwvTq8)
+- How to Choose the Right Database? [https://www.youtube.com/watch?v=v5e_PasMdXc](https://www.youtube.com/watch?v=v5e_PasMdXc)
+- Visual Guide to NoSQL Systems [https://blog.nahurst.com/visual-guide-to-nosql-systems](https://blog.nahurst.com/visual-guide-to-nosql-systems)

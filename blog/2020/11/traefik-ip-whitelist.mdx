@@ -15,11 +15,11 @@ cover_image:
 
 Security is an important consideration when building web based systems. A big part of this is giving access to critical resources to as few people as possible. For example, a lot of brute force attacks can be prevented if we limit SSH access to our server to only a handful of IP addresses (for instance, our VPN server and our office IP addresses). Same applies to dashboards and admin interfaces, such as database admin panels (pgAdmin, phpMyAdmin, Mongo express and others). If you use Traefik as your gateway to these dashboards, you can specify IP whitelists to give access to specific IP addresses or ranges. Let's look at how to do this.
 
-If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}){:target="\_blank"}. I will not cover `traefik.toml` setup from scratch in this blog post.
+If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}). I will not cover `traefik.toml` setup from scratch in this blog post.
 
 ## Adding dynamic configuration to Traefik
 
-[Dynamic configuration](https://doc.traefik.io/traefik/getting-started/configuration-overview/#the-dynamic-configuration){:target="\_blank"} allows us to define, among other things, [middleware](https://docs.traefik.io/middlewares/overview/){:target="\_blank"} of Traefik. Middleware works by examining the request (or response) sent to the service (Docker container) and performing an operation on it. This could mean changing the contents of the request or deciding to drop the request based on some decision. We will use middleware to drop any requests which are not coming from specified IP addresses.
+[Dynamic configuration](https://doc.traefik.io/traefik/getting-started/configuration-overview/#the-dynamic-configuration) allows us to define, among other things, [middleware](https://docs.traefik.io/middlewares/overview/) of Traefik. Middleware works by examining the request (or response) sent to the service (Docker container) and performing an operation on it. This could mean changing the contents of the request or deciding to drop the request based on some decision. We will use middleware to drop any requests which are not coming from specified IP addresses.
 
 I prefer to create all middleware in a file, as it can usually be shared among many containers and easily copy-pasted into other configurations.
 
@@ -54,7 +54,7 @@ Now, restart the system to apply the bind mount. This will also reload static co
 docker-compose up -d
 ```
 
-Check out my [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}){:target="\_blank"} for full `docker-compose.yml` and `traefik.toml` if you don't have them yet.
+Check out my [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}) for full `docker-compose.yml` and `traefik.toml` if you don't have them yet.
 
 <p></p>
 
@@ -74,7 +74,7 @@ Here are the contents of `dynamic/middlewares.toml`:
     # .. more middleware if needed
 ```
 
-We define the [ipWhiteList](https://doc.traefik.io/traefik/middlewares/ipwhitelist/){:target="\_blank"} middleware named `my-whitelist` (name must be unique and I usually give it a more descriptive name, such as `allow-vpn-ipwhitelist`). The important part is this line:
+We define the [ipWhiteList](https://doc.traefik.io/traefik/middlewares/ipwhitelist/) middleware named `my-whitelist` (name must be unique and I usually give it a more descriptive name, such as `allow-vpn-ipwhitelist`). The important part is this line:
 
 ```toml
 sourceRange = ["11.22.33.44/32", "22.33.44.0/24"]
@@ -140,4 +140,4 @@ Check out my other examples of Traefik usage, if you are interested:
 
 ## Resources
 
-- Traefik docs: [https://docs.traefik.io/](https://docs.traefik.io/){:target="\_blank"}
+- Traefik docs: [https://docs.traefik.io/](https://docs.traefik.io/)

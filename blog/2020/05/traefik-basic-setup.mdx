@@ -13,9 +13,9 @@ cover_image:
   credit_link: "https://doc.traefik.io/traefik/"
 ---
 
-When I started deploying my apps on actual servers, I always had a problem with the global architecture of the server: I had a lot of Docker containers, which needed to be connected to the internet. But, because only one port 80 and 443 can be exposed on a single server (I don't recommend exposing any other ports, rather connect services to a domain and create a virtual host - e. g. your API running on port 3000 should be proxied to with a domain `api.example.com`), I had to create a separate Nginx container to proxy all requests from the internet to my containers. This was annoying as I had to constantly modify my Nginx configuration files and generate Let's encrypt certificates manually or use additional containers to do the automation (like [`docker-letsencrypt-nginx-proxy-companion`](https://github.com/nginx-proxy/docker-letsencrypt-nginx-proxy-companion){:target="\_blank"}).
+When I started deploying my apps on actual servers, I always had a problem with the global architecture of the server: I had a lot of Docker containers, which needed to be connected to the internet. But, because only one port 80 and 443 can be exposed on a single server (I don't recommend exposing any other ports, rather connect services to a domain and create a virtual host - e. g. your API running on port 3000 should be proxied to with a domain `api.example.com`), I had to create a separate Nginx container to proxy all requests from the internet to my containers. This was annoying as I had to constantly modify my Nginx configuration files and generate Let's encrypt certificates manually or use additional containers to do the automation (like [`docker-letsencrypt-nginx-proxy-companion`](https://github.com/nginx-proxy/docker-letsencrypt-nginx-proxy-companion)).
 
-[Traefik](https://docs.traefik.io/){:target="\_blank"} is a technology that I have fallen in love with ever since I discovered it because it solves this very problem, but in a much simpler way, without modifying any configuration files for the most part. I am now using Traefik to:
+[Traefik](https://docs.traefik.io/) is a technology that I have fallen in love with ever since I discovered it because it solves this very problem, but in a much simpler way, without modifying any configuration files for the most part. I am now using Traefik to:
 
 - connect all my Docker containers and expose them to the internet through a single Traefik proxy,
 - automate all SSL certificates,
@@ -31,9 +31,9 @@ In this blog post I want to share my base Traefik configuration. This includes:
 
 After these steps, you will have the ecosystem, but no actual sites yet. Check the follow-ups to this blog post with common practical uses:
 
-- [Nginx proxy example]({% post_url 2020-05-02-traefik-nginx-proxy %}){:target="\_blank"} - connect a basic Nginx proxy to Traefik.
-- [Full-stack Angular + Node.js + Postgres application example]({% post_url 2020-05-02-traefik-nodejs-api-and-db %}){:target="\_blank"} - connect a typical full-stack application to Traefik.
-- [Proxy to S3 bucket example]({% post_url 2020-05-02-traefik-s3-proxy %}){:target="\_blank"} - use Traefik as a reverse proxy to an S3 bucket (to serve a static site).
+- [Nginx proxy example]({% post_url 2020-05-02-traefik-nginx-proxy %}) - connect a basic Nginx proxy to Traefik.
+- [Full-stack Angular + Node.js + Postgres application example]({% post_url 2020-05-02-traefik-nodejs-api-and-db %}) - connect a typical full-stack application to Traefik.
+- [Proxy to S3 bucket example]({% post_url 2020-05-02-traefik-s3-proxy %}) - use Traefik as a reverse proxy to an S3 bucket (to serve a static site).
 
 <p></p>
 
@@ -280,17 +280,17 @@ Visit `monitor.mydomain.com`, enter your username and password and you should be
 
 Further examples are presented in separate blog posts. Here are the links to some common uses of Traefik:
 
-- [Nginx proxy example]({% post_url 2020-05-02-traefik-nginx-proxy %}){:target="\_blank"} - connect a basic Nginx proxy to Traefik.
-- [Full-stack Angular + Node.js + Postgres application example]({% post_url 2020-05-02-traefik-nodejs-api-and-db %}){:target="\_blank"} - connect a typical full-stack application to Traefik.
-- [Proxy to S3 bucket example]({% post_url 2020-05-02-traefik-s3-proxy %}){:target="\_blank"} - use Traefik as a reverse proxy to an S3 bucket (to serve a static site).
+- [Nginx proxy example]({% post_url 2020-05-02-traefik-nginx-proxy %}) - connect a basic Nginx proxy to Traefik.
+- [Full-stack Angular + Node.js + Postgres application example]({% post_url 2020-05-02-traefik-nodejs-api-and-db %}) - connect a typical full-stack application to Traefik.
+- [Proxy to S3 bucket example]({% post_url 2020-05-02-traefik-s3-proxy %}) - use Traefik as a reverse proxy to an S3 bucket (to serve a static site).
 - [IP whitelist example]({% post_url 2020-11-07-traefik-ip-whitelist %}) - allow only certain IP addresses to access selected Docker containers.
 
 <p></p>
 
 ## Resources
 
-- Traefik docs: [https://docs.traefik.io/](https://docs.traefik.io/){:target="\_blank"}
-- Docker provider for Traefik: [https://docs.traefik.io/providers/docker/](https://docs.traefik.io/providers/docker/){:target="\_blank"}
-- Middlewares for Traefik: [https://docs.traefik.io/middlewares/overview/](https://docs.traefik.io/middlewares/overview/){:target="\_blank"}
-- Traefik dashboard settings: [https://docs.traefik.io/operations/dashboard/](https://docs.traefik.io/operations/dashboard/){:target="\_blank"}
-- Let's encrypt for Traefik: [https://docs.traefik.io/https/acme/](https://docs.traefik.io/https/acme/){:target="\_blank"}
+- Traefik docs: [https://docs.traefik.io/](https://docs.traefik.io/)
+- Docker provider for Traefik: [https://docs.traefik.io/providers/docker/](https://docs.traefik.io/providers/docker/)
+- Middlewares for Traefik: [https://docs.traefik.io/middlewares/overview/](https://docs.traefik.io/middlewares/overview/)
+- Traefik dashboard settings: [https://docs.traefik.io/operations/dashboard/](https://docs.traefik.io/operations/dashboard/)
+- Let's encrypt for Traefik: [https://docs.traefik.io/https/acme/](https://docs.traefik.io/https/acme/)

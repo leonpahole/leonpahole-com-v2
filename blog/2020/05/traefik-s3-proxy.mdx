@@ -13,7 +13,7 @@ cover_image:
   credit_link: "https://doc.traefik.io/traefik/"
 ---
 
-If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}){:target="\_blank"}. This blog post assumes you have this setup ready:
+If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}). This blog post assumes you have this setup ready:
 
 - HTTP to HTTPS redirect,
 - automated Let's encrypt certificates.
@@ -24,7 +24,7 @@ We will enable Traefik to proxy requests from a domain `www.mydomain.com` (`mydo
 
 You need to have an AWS S3 bucket set up to **host a static website and allow public access**. Also, the **bucket name needs to match your domain name including www**. So, in our example, the bucket needs to be named **www.mydomain.com**.
 
-Here is a complete tutorial for creating a bucket with exact settings that we need: [https://docs.aws.amazon.com/AmazonS3/latest/user-guide/static-website-hosting.html](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/static-website-hosting.html){:target="\_blank"}.
+Here is a complete tutorial for creating a bucket with exact settings that we need: [https://docs.aws.amazon.com/AmazonS3/latest/user-guide/static-website-hosting.html](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/static-website-hosting.html).
 
 You should also retrieve the URL, associated with your bucket, in the S3 console (Properties -> Static website hosting -> Endpoint). It looks something like this (exact URL depends on bucket name and region): _http://www.mydomain.com.s3-website.eu-central-1.amazonaws.com/_.
 
@@ -114,16 +114,16 @@ Explanation:
           sans = ["mydomain.com"]
 ```
 
-A [router](https://docs.traefik.io/routing/routers/){:target="\_blank"} will accept a request from an entrypoint, apply middleware, and then forward the request to the service (the actual backend).
+A [router](https://docs.traefik.io/routing/routers/) will accept a request from an entrypoint, apply middleware, and then forward the request to the service (the actual backend).
 
 Here is what we tell Traefik for this router in above code:
 
 - We name our router `mysite`. The names of routers are unique so make sure that you only have one router named `mysite`. I also recommend changing this name to something more explanatory, I use `mysite` only for demo purposes.
-- We tell the router to accept requests coming from the entrypoint `websecure`. We defined this entrypoint in the [previous blog post]({% post_url 2020-05-02-traefik-basic-setup %}){:target="\_blank"} and it defines port 443.
+- We tell the router to accept requests coming from the entrypoint `websecure`. We defined this entrypoint in the [previous blog post]({% post_url 2020-05-02-traefik-basic-setup %}) and it defines port 443.
 - We tell the router to use middleware `mysite-www` (described below). In short, this middleware will redirect non-www to www.
 - We tell the router to forward request to service `extmysite`, which will call our bucket. One again, the service name should be unique.
 - We tell the router to match and handle requests with URL `mydomain.com` or `www.mydomain.com`.
-- We tell the router to generate certificates for `www.mydomain.com` and `mydomain.com` using cert resolver `letsencrypt` (defined in the [previous blog post]({% post_url 2020-05-02-traefik-basic-setup %}){:target="\_blank"}).
+- We tell the router to generate certificates for `www.mydomain.com` and `mydomain.com` using cert resolver `letsencrypt` (defined in the [previous blog post]({% post_url 2020-05-02-traefik-basic-setup %})).
 
 <p></p>
 
@@ -136,7 +136,7 @@ Here is what we tell Traefik for this router in above code:
       # url = "http://www.mydomain.com.s3-website.eu-central-1.amazonaws.com/"
 ```
 
-We define a [service](https://docs.traefik.io/routing/services/){:target="\_blank"} `extmysite` that simply proxies to our bucket.
+We define a [service](https://docs.traefik.io/routing/services/) `extmysite` that simply proxies to our bucket.
 
 ```toml
 [http.middlewares]
@@ -146,9 +146,9 @@ We define a [service](https://docs.traefik.io/routing/services/){:target="\_blan
     permanent = true
 ```
 
-We define a [middleware](https://docs.traefik.io/middlewares/overview/){:target="\_blank"} `mysite-www`, which redirects non-www requests to www using a simple regex. Be sure to substitute `mydomain.com` with your actual domain in the regex.
+We define a [middleware](https://docs.traefik.io/middlewares/overview/) `mysite-www`, which redirects non-www requests to www using a simple regex. Be sure to substitute `mydomain.com` with your actual domain in the regex.
 
-Keep in mind that the configuration is based on the [base setup]({% post_url 2020-05-02-traefik-basic-setup %}){:target="\_blank"}, and thus contains names of entrypoints (`websecure`) and cert providers (`letsencrypt`), as defined in that setup. Be sure to substitute those, if using a different setup.
+Keep in mind that the configuration is based on the [base setup]({% post_url 2020-05-02-traefik-basic-setup %}), and thus contains names of entrypoints (`websecure`) and cert providers (`letsencrypt`), as defined in that setup. Be sure to substitute those, if using a different setup.
 
 Make sure that DNS records for `www.mydomain.com` and `mydomain.com` point to your server, and then save the file. In a few moments, `www.mydomain.com` and `mydomain.com` will be available. You can check logs of Traefik to see how Traefik detected the configuration automatically and generated a certificate for it. **So, no restarts are needed!**
 
@@ -194,5 +194,5 @@ Check out my other examples of Traefik usage, if you are interested:
 
 ## Resources
 
-- Traefik docs: [https://docs.traefik.io/](https://docs.traefik.io/){:target="\_blank"}
-- Create a static website bucket on AWS S3: [https://docs.aws.amazon.com/AmazonS3/latest/user-guide/static-website-hosting.html](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/static-website-hosting.html){:target="\_blank"}
+- Traefik docs: [https://docs.traefik.io/](https://docs.traefik.io/)
+- Create a static website bucket on AWS S3: [https://docs.aws.amazon.com/AmazonS3/latest/user-guide/static-website-hosting.html](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/static-website-hosting.html)

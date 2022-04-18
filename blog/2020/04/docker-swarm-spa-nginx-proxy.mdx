@@ -20,9 +20,9 @@ _Note: this blog post focuses on the deployment part of the development workflow
 
 Github repositories for this blog post:
 
-- [Simple frontend](https://github.com/leonpahole/simple-frontend-angular){:target="\_blank"} - Angular 9 app that exchanges data (read and write) with backend.
-- [Simple backend](https://github.com/leonpahole/simple-backend-nodejs){:target="\_blank"} - Node.js 12 app that communicates with Postgres database and serves a REST API.
-- [DevOps project](https://github.com/leonpahole/simple-app-devops){:target="\_blank"} - Defines the architecture and all DevOps tools for deployment of our app.
+- [Simple frontend](https://github.com/leonpahole/simple-frontend-angular) - Angular 9 app that exchanges data (read and write) with backend.
+- [Simple backend](https://github.com/leonpahole/simple-backend-nodejs) - Node.js 12 app that communicates with Postgres database and serves a REST API.
+- [DevOps project](https://github.com/leonpahole/simple-app-devops) - Defines the architecture and all DevOps tools for deployment of our app.
 
 Simple frontend communicates with Simple backend to send and receive data. Simple backend includes a Postgres database where the data is read from and written to. DevOps project pulls together the entire app and includes scripts for deployment.
 
@@ -67,9 +67,9 @@ With that said, I still sometimes use Docker compose to deploy, when the applica
 
 ### Backend
 
-Looking at our [Simple backend](https://github.com/leonpahole/simple-backend-nodejs){:target="\_blank"}, the dockerization process is pretty standard.
+Looking at our [Simple backend](https://github.com/leonpahole/simple-backend-nodejs), the dockerization process is pretty standard.
 
-Here is the [Dockerfile](https://github.com/leonpahole/simple-backend-nodejs/blob/master/Dockerfile){:target="\_blank"}:
+Here is the [Dockerfile](https://github.com/leonpahole/simple-backend-nodejs/blob/master/Dockerfile):
 
 ```dockerfile
 # This build stage extracts dependencies and devDependencies from package.json ...
@@ -128,7 +128,7 @@ We copy our `package.json` and `yarn.lock`, install dependencies, copy applicati
 
   Docker secrets are injected into a container by Docker swarm through a special file, which the application should read from the file system of the container. By convention, paths to these files are given to the container as an environment variable ending with `_FILE`. For example, if our app accepts a secret `DB_PASSWORD`, we should also make sure it accepts `DB_PASSWORD_FILE`. If `DB_PASSWORD` is not present, we fall back to reading `DB_PASSWORD_FILE` from the disk and loading its contents into the `DB_PASSWORD` variable.
 
-  In order to avoid having to do this in the application code (e.g. using fs module in Node), script [`docker-entrypoint.sh`](https://github.com/leonpahole/simple-backend-nodejs/blob/master/docker-entrypoint.sh){:target="\_blank"} does this automatically for us. All we have to do is specify all secrets that we will support in the file. Here is the excerpt from `docker-entrypoint.sh`, which defines all secrets that my app accepts:
+  In order to avoid having to do this in the application code (e.g. using fs module in Node), script [`docker-entrypoint.sh`](https://github.com/leonpahole/simple-backend-nodejs/blob/master/docker-entrypoint.sh) does this automatically for us. All we have to do is specify all secrets that we will support in the file. Here is the excerpt from `docker-entrypoint.sh`, which defines all secrets that my app accepts:
 
   ```bash
   # all secrets of the application
@@ -190,13 +190,13 @@ Note how we check for presence of `_FILE` variables, read their contents from di
 
 ### Frontend
 
-Looking at our [Simple frontend Dockerfile](https://github.com/leonpahole/simple-frontend-angular/blob/master/Dockerfile){:target="\_blank"}, the dockerization process is also pretty standard. We use nginx to serve our built Angular code.
+Looking at our [Simple frontend Dockerfile](https://github.com/leonpahole/simple-frontend-angular/blob/master/Dockerfile), the dockerization process is also pretty standard. We use nginx to serve our built Angular code.
 
 Additionally, we use the same "trick" as with the backend to avoid rebuilding of node_modules when version in `package.json` is bumped. We also introduce another build stage, which builds and bundles application code. This means that source code will not be present in our final image, which is good. Finally, we also copy a custom Nginx configuration file into our image, which supports Angular routing (default config throws 404 when we access something else than root ('/')).
 
 ## Release script
 
-Release script [release.sh](https://github.com/leonpahole/simple-backend-nodejs/tree/master/bin){:target="\_blank"} is a simple script, independent of the project we use it in. It works as follows:
+Release script [release.sh](https://github.com/leonpahole/simple-backend-nodejs/tree/master/bin) is a simple script, independent of the project we use it in. It works as follows:
 
 - Run Docker build and build the image
 - Log in to Docker container registry
@@ -206,13 +206,13 @@ Release script [release.sh](https://github.com/leonpahole/simple-backend-nodejs/
 
 The script is interactive and prompts the user for all steps before doing anything critical. The only requirement for the script is the `release.env` file, which contains URL and username for container registry and image name.
 
-Before you can run the script, you should create your image repository on your container registry of choice. If this is Docker hub, you should create a repository [here](https://hub.docker.com/repository/create){:target="\_blank"}. After creating the repository, enter its name into `release.env`. You will have to create two repositories; one for frontend and one for backend and use this script in both of them (I recommend placing files into `bin` directory of both projects).
+Before you can run the script, you should create your image repository on your container registry of choice. If this is Docker hub, you should create a repository [here](https://hub.docker.com/repository/create). After creating the repository, enter its name into `release.env`. You will have to create two repositories; one for frontend and one for backend and use this script in both of them (I recommend placing files into `bin` directory of both projects).
 
 ## Bringing it all together with the DevOps project
 
 We will create a third project, which will take care of deploying the application. It will be checked into version control, allowing anyone with sufficient permissions to update the application. The state of files in version control will also show the current state of your application on your production server (e.g. all versions and container architecture).
 
-Here is the project for reference: [DevOps project](https://github.com/leonpahole/simple-app-devops){:target="\_blank"}.
+Here is the project for reference: [DevOps project](https://github.com/leonpahole/simple-app-devops).
 
 ### Application architecture
 
@@ -224,7 +224,7 @@ Let's talk for a bit about the architecture of our application. We will have 4 a
 
 ### Local testing Swarm file
 
-This step will allow us to test our swarm locally with docker-compose (without swarm mode) before deploying it live. To begin, we create a [docker-stack.dev.yml](https://github.com/leonpahole/simple-app-devops/blob/master/docker-stack.dev.yml){:target="\_blank"}.
+This step will allow us to test our swarm locally with docker-compose (without swarm mode) before deploying it live. To begin, we create a [docker-stack.dev.yml](https://github.com/leonpahole/simple-app-devops/blob/master/docker-stack.dev.yml).
 
 Let's walk through each part of the system.
 
@@ -350,7 +350,7 @@ The most important thing to test is if all containers are running.
 
 ### Production stack file
 
-Now that we have a local development stack file that works, we will create the production stack file [`docker-stack.yml`](https://github.com/leonpahole/simple-app-devops/blob/master/ansible/files/docker-stack.yml){:target="\_blank"}. The file has some differences compared to the development file.
+Now that we have a local development stack file that works, we will create the production stack file [`docker-stack.yml`](https://github.com/leonpahole/simple-app-devops/blob/master/ansible/files/docker-stack.yml). The file has some differences compared to the development file.
 
 #### The proxy
 
@@ -504,7 +504,7 @@ ansible/
   requirements.yml
 ```
 
-Example directory can be found [here](https://github.com/leonpahole/simple-app-devops/tree/master/ansible){:target="\_blank"}.
+Example directory can be found [here](https://github.com/leonpahole/simple-app-devops/tree/master/ansible).
 
 #### Production file
 
@@ -562,7 +562,7 @@ docker_secrets:
 
 _Note: the playbook is adjusted to work on Ubuntu based systems. It has been tested on Hetzner and Digital ocean Ubuntu servers. You will need to adjust it if your server uses a different package manager than apt._
 
-The playbook [deploy.yml](https://github.com/leonpahole/simple-app-devops/blob/master/ansible/deploy.yml){:target="\_blank"} performs the following tasks:
+The playbook [deploy.yml](https://github.com/leonpahole/simple-app-devops/blob/master/ansible/deploy.yml) performs the following tasks:
 
 1. Update apt cache
 2. Install docker
@@ -624,5 +624,5 @@ In the future blog post, I will also discuss how to substitute `nginx-proxy` wit
 
 ## References
 
-- [https://github.com/BretFisher/node-docker-good-defaults](https://github.com/BretFisher/node-docker-good-defaults){:target="\_blank"}
-- [https://stackoverflow.com/questions/51110793/bumping-package-json-version-without-invalidating-docker-cache](https://stackoverflow.com/questions/51110793/bumping-package-json-version-without-invalidating-docker-cache){:target="\_blank"}
+- [https://github.com/BretFisher/node-docker-good-defaults](https://github.com/BretFisher/node-docker-good-defaults)
+- [https://stackoverflow.com/questions/51110793/bumping-package-json-version-without-invalidating-docker-cache](https://stackoverflow.com/questions/51110793/bumping-package-json-version-without-invalidating-docker-cache)
