@@ -59,7 +59,6 @@ module.exports = {
       },
     },
     "gatsby-plugin-mdx",
-    "gatsby-plugin-sharp",
     "gatsby-plugin-slug",
     {
       resolve: "gatsby-transformer-remark",
