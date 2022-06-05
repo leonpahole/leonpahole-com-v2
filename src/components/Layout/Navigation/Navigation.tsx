@@ -6,9 +6,9 @@ export default function Navigation() {
   return (
     <div className="header-navigation-container">
       <h2 className="navigation-title">
-        <a href="/" className="title-link">
+        <Link className="title-link" to="/">
           Leon Pahole
-        </a>
+        </Link>
       </h2>
       <ul className="item-container">
         <li className="menu-item selected">
