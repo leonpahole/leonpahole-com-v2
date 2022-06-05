@@ -36,6 +36,7 @@
     display: flex;
     justify-content: flex-end;
     padding-left: unset;
+    margin: 0;
 
     @include respond-to("medium") {
       justify-content: center;
