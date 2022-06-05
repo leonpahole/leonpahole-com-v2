@@ -19,7 +19,7 @@ In my opinion, a function in any programming language should be clearly understa
 
 Let's take a very simple example: a function that calculates body mass index (BMI) of a person. Here it is:
 
-```javascript
+```js
 function calculateBMI(weight, height) {
   return weight / (height * height);
 }
@@ -27,7 +27,7 @@ function calculateBMI(weight, height) {
 
 Let's examine the function header:
 
-```javascript
+```js
 function calculateBMI(weight, height);
 ```
 
@@ -135,7 +135,7 @@ const {
   height,
   pet: { type: petType, name: petName },
 } = person;
-// weight = 75, height = 1.73, petType = 'cat', petName = 'Simba'. Note that pet = null.
+// weight = 75, height = 1.73, petType = 'cat', petName = 'Simba'. Note that pet is undefined.
 ```
 
 Note that I renamed type of pet to _petType_ and name of pet to _petName_. This is to avoid potential confusion with pet name and person name.
@@ -180,7 +180,7 @@ const person = { weight: 75, height: 1.73 };
 calculateBMI(person);
 ```
 
-We can also, just like with normal parameters, add default values for attributes with value null:
+We can also, just like with normal parameters, add default values for attributes with undefined value:
 
 ```javascript
 function calculateBMI({ weight: weightInKg = 75, height: heightInM }) {
@@ -217,7 +217,7 @@ In my opinion, normal destructuring with or without defaults looks the best. Ren
 
 Here is an example with React component:
 
-```react
+```js
 function Person({ name, lastname, age }) {
   /* ... */
 }
