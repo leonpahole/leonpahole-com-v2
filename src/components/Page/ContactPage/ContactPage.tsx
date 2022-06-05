@@ -22,15 +22,6 @@ export const ContactPage = () => {
             leonpahole
           </Link>
         </li>
-        <li>
-          <strong>GitLab</strong>:{" "}
-          <Link to="https://gitlab.com/leonpahole" target="_blank">
-            leonpahole
-          </Link>
-        </li>
-        <li>
-          <strong>LinkedIn</strong>: <i>Coming soon</i>
-        </li>
       </ul>
     </>
   );
