@@ -65,7 +65,7 @@ First of all, it might **break legacy code**. We have to search for all usages o
 
 Additionally, sometimes it is simply not possible to refactor due to the **limitations of the framework**. Take React.js for instance. In React, a component (which is a building block of a website) may accept some inputs from parent components. These inputs are cumulated into an object called props. For example:
 
-```react
+```js
 function Person(props) {
   return (
     <h1>
