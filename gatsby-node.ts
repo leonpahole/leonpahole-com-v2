@@ -99,6 +99,22 @@ const generatePaginatedBlogListPages = (
   });
 };
 
+const createRedirects = (actions: CreatePagesArgs["actions"]) => {
+  const redirects = [
+    {
+      from: "/2020/05/traefik-nodejs-api-and-db.html",
+      to: "/blog/traefik-nodejs-api-and-db",
+    },
+  ];
+
+  redirects.forEach((redirect) => {
+    actions.createRedirect({
+      fromPath: redirect.from,
+      toPath: redirect.to,
+    });
+  });
+};
+
 export const createPages: GatsbyNode["createPages"] = async ({
   actions,
   graphql,
@@ -118,4 +134,6 @@ export const createPages: GatsbyNode["createPages"] = async ({
   );
   generateBlogPostPages((result.data as any).allPosts.nodes, actions);
   generatePaginatedBlogListPages((result.data as any).allPosts.nodes, actions);
+
+  createRedirects(actions);
 };
