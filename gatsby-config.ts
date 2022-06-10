@@ -6,6 +6,14 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-TNMJ6XX",
+        includeInDevelopment: false, // only in production
+        enableWebVitalsTracking: true,
+      },
+    },
+    {
       resolve: "gatsby-plugin-sass",
       options: {
         additionalData: `@import "./src/styles/globals";`,

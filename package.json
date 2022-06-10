@@ -23,6 +23,7 @@
     "@mdx-js/react": "v1",
     "gatsby": "^4.11.2",
     "gatsby-plugin-fontawesome-css": "^1.2.0",
+    "gatsby-plugin-google-tagmanager": "^4.16.0",
     "gatsby-plugin-image": "^2.11.1",
     "gatsby-plugin-mdx": "^3.12.1",
     "gatsby-plugin-react-helmet": "^5.11.0",

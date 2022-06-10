@@ -6744,6 +6744,14 @@ gatsby-plugin-fontawesome-css@^1.2.0:
   resolved "https://registry.yarnpkg.com/gatsby-plugin-fontawesome-css/-/gatsby-plugin-fontawesome-css-1.2.0.tgz#fc828dd1d39ff46d7a22f1389642ba65d4755a18"
   integrity sha512-Me7zFKPDmFQAWZmC2MQN7vWSHGFneu6FeIylkVinSMh89C0wPeoF165rpfuEdpgG0HScNg0fSh3xCIxYr5gPOQ==
 
+gatsby-plugin-google-tagmanager@^4.16.0:
+  version "4.16.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-tagmanager/-/gatsby-plugin-google-tagmanager-4.16.0.tgz#c90f6e8359d6de1f2cdbf71b771833ddd11cef04"
+  integrity sha512-y3PSKwIgSYHpKoEg++XOimP838qZm49KO4dkAAPK3/DcRofeVYiMAbs2PDSgSMMD1aW9f1GMw5ThFvpG9Q4ndg==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    web-vitals "^1.1.2"
+
 gatsby-plugin-graphql-codegen@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-graphql-codegen/-/gatsby-plugin-graphql-codegen-3.1.1.tgz#346c29a28d0eec37ed74a1c6686df65898cd34aa"
@@ -13694,6 +13702,11 @@ web-namespaces@^1.0.0:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/web-namespaces/-/web-namespaces-1.1.4.tgz#bc98a3de60dadd7faefc403d1076d529f5e030ec"
   integrity sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==
+
+web-vitals@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-1.1.2.tgz#06535308168986096239aa84716e68b4c6ae6d1c"
+  integrity sha512-PFMKIY+bRSXlMxVAQ+m2aw9c/ioUYfDgrYot0YUa+/xa0sakubWhSDyxAKwzymvXVdF4CZI71g06W+mqhzu6ig==
 
 webfontloader@^1.6.28:
   version "1.6.28"
