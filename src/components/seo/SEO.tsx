@@ -15,10 +15,9 @@ const siteMetadataQuery = graphql`
   query SEO {
     site {
       siteMetadata {
-        defaultTitle: title
-        titleTemplate
+        fullName
         defaultDescription: description
-        siteUrl: siteUrl
+        siteUrl
       }
     }
   }
@@ -32,22 +31,17 @@ export const SEO: React.FC<IProps> = ({
 }) => {
   const { pathname } = useLocation();
   const { site } = useStaticQuery(siteMetadataQuery);
-  const { defaultTitle, titleTemplate, defaultDescription, siteUrl } =
-    site.siteMetadata;
+  const { fullName, defaultDescription, siteUrl } = site.siteMetadata;
 
   const seo = {
-    title: title || defaultTitle,
+    title: title ? `${title} | ${fullName}` : fullName,
     description: description || defaultDescription,
     image: `${image || LeonPahole}`,
     url: `${siteUrl}${pathname}`,
   };
 
   return (
-    <Helmet
-      title={seo.title}
-      titleTemplate={titleTemplate}
-      htmlAttributes={{ lang: "en" }}
-    >
+    <Helmet title={seo.title} htmlAttributes={{ lang: "en" }}>
       <meta charSet="utf-8" />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />

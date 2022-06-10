@@ -270,9 +270,8 @@ export type SiteBuildTimeArgs = {
 export type SiteSiteMetadata = {
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  titleTemplate?: Maybe<Scalars['String']>;
+  fullName?: Maybe<Scalars['String']>;
   siteUrl?: Maybe<Scalars['String']>;
-  image?: Maybe<Scalars['String']>;
 };
 
 export type SiteFunction = Node & {
@@ -1961,9 +1960,8 @@ export type DirectorySortInput = {
 export type SiteSiteMetadataFilterInput = {
   title?: InputMaybe<StringQueryOperatorInput>;
   description?: InputMaybe<StringQueryOperatorInput>;
-  titleTemplate?: InputMaybe<StringQueryOperatorInput>;
+  fullName?: InputMaybe<StringQueryOperatorInput>;
   siteUrl?: InputMaybe<StringQueryOperatorInput>;
-  image?: InputMaybe<StringQueryOperatorInput>;
 };
 
 export type SiteConnection = {
@@ -2015,9 +2013,8 @@ export type SiteFieldsEnum =
   | 'buildTime'
   | 'siteMetadata___title'
   | 'siteMetadata___description'
-  | 'siteMetadata___titleTemplate'
+  | 'siteMetadata___fullName'
   | 'siteMetadata___siteUrl'
-  | 'siteMetadata___image'
   | 'port'
   | 'host'
   | 'polyfill'
@@ -3466,7 +3463,7 @@ export type ImageSharpSortInput = {
 export type SeoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SeoQuery = { site?: { siteMetadata?: { titleTemplate?: string | null, defaultTitle?: string | null, defaultDescription?: string | null, siteUrl?: string | null } | null } | null };
+export type SeoQuery = { site?: { siteMetadata?: { fullName?: string | null, siteUrl?: string | null, defaultDescription?: string | null } | null } | null };
 
 export type BlogListQueryVariables = Exact<{
   skip: Scalars['Int'];
