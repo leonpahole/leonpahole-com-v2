@@ -3,6 +3,7 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import { BlogPostList } from "components/blog/BlogPostList/BlogPostList";
 import { BlogModels } from "models/blog-models";
+import { SEO } from "components/seo/SEO";
 
 // eslint-disable-next-line no-restricted-imports
 import { BlogListQuery } from "../../graphql-types";
@@ -21,7 +22,8 @@ const BlogList: React.FC<IProps> = ({ data, pageContext }) => {
   }, [data]);
 
   return (
-    <Layout title="Blog">
+    <Layout>
+      <SEO title="Blog" description="My personal blog" />
       <BlogPostList
         posts={blogPosts}
         currentPage={pageContext.currentPage}

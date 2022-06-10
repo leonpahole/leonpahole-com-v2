@@ -3,6 +3,8 @@ import { graphql } from "gatsby";
 import Layout from "components/Layout/PageWrapper/PageWrapper";
 import { BlogModels } from "models/blog-models";
 import { BlogPostItem } from "components/blog/BlogPostItem/BlogPostItem";
+import { SEO } from "components/seo/SEO";
+import { getSrc } from "gatsby-plugin-image";
 
 // eslint-disable-next-line no-restricted-imports
 import { BlogPostDetailsQuery } from "../../graphql-types";
@@ -17,7 +19,15 @@ const BlogPost: React.FC<IProps> = ({ data }) => {
   }, [data]);
 
   return (
-    <Layout title={`${blogPost.title}`}>
+    <Layout>
+      <SEO
+        title={blogPost.title}
+        description={blogPost.excerpt}
+        article
+        image={
+          blogPost.coverImage?.src ? getSrc(blogPost.coverImage.src) : undefined
+        }
+      />
       <BlogPostItem post={blogPost} />
     </Layout>
   );

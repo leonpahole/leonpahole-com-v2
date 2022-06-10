@@ -4,7 +4,7 @@ import * as React from "react";
 
 const Contact = () => {
   return (
-    <Layout title="Contact">
+    <Layout>
       <ContactPage />
     </Layout>
   );

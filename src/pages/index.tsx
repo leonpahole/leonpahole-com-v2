@@ -4,7 +4,7 @@ import * as React from "react";
 
 const Home = () => {
   return (
-    <Layout title="Home" showNavigation={false}>
+    <Layout showNavigation={false}>
       <HomePage />
     </Layout>
   );

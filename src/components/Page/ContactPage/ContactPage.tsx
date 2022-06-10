@@ -1,9 +1,12 @@
+import { SEO } from "components/seo/SEO";
 import { Link } from "gatsby";
 import React from "react";
 
 export const ContactPage = () => {
   return (
     <>
+      <SEO title="Contact" description="Get in contact with me" />
+
       <h1 className="site-heading">Get in contact</h1>
 
       <p>

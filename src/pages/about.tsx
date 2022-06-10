@@ -4,7 +4,7 @@ import * as React from "react";
 
 const About = () => {
   return (
-    <Layout title="About">
+    <Layout>
       <AboutPage />
     </Layout>
   );

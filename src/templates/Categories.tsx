@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import Layout from "components/Layout/PageWrapper/PageWrapper";
 import { BlogPostList } from "components/blog/BlogPostList/BlogPostList";
 import { BlogModels } from "models/blog-models";
+import { SEO } from "components/seo/SEO";
 
 // eslint-disable-next-line no-restricted-imports
 import { CategoryIndexQuery } from "../../graphql-types";
@@ -21,10 +22,12 @@ const Categories: React.FC<IProps> = ({ data, pageContext }) => {
     return BlogModels.Mapper.toBlogPosts(data.allCategoryPosts.nodes);
   }, [data]);
 
-  console.log("pagecontext", pageContext);
-
   return (
-    <Layout title={`${pageContext.category} blog posts`}>
+    <Layout>
+      <SEO
+        title={`${pageContext.category} blog posts`}
+        description={`Blog posts for category: ${pageContext.category}`}
+      />
       <BlogPostList
         posts={blogPosts}
         forCategory={pageContext.category}

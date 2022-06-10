@@ -1,11 +1,17 @@
+import { SEO } from "components/seo/SEO";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
-import "src/components/Page/AboutPage/about-page.scss";
+import "components/Page/AboutPage/about-page.scss";
 
 export const AboutPage = () => {
   return (
     <>
+      <SEO
+        title="About me"
+        description="My skills, experience and future goals"
+      />
+
       <section id="introduction-section" className="about-me-section">
         <h1 className="site-heading">About me</h1>
 
