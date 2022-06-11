@@ -36,8 +36,13 @@ const generatePaginatedCategoryPage = (
   const numPages = Math.ceil(category.totalCount / BlogPostsPerPage);
 
   Array.from({ length: numPages }).forEach((_, pageNumber) => {
+    const categoryPath = RoutingUtil.getCategoryLink(
+      category.fieldValue,
+      pageNumber + 1
+    );
+
     actions.createPage({
-      path: RoutingUtil.getCategoryLink(category.fieldValue, pageNumber + 1),
+      path: categoryPath,
       component: categoryTemplate,
       context: {
         limit: BlogPostsPerPage,
@@ -46,6 +51,17 @@ const generatePaginatedCategoryPage = (
         currentPage: pageNumber + 1,
         category: category.fieldValue,
       },
+    });
+
+    // redirect for old page
+    const oldPageCategoryPath = RoutingUtil.getOldPageCategoryLink(
+      category.fieldValue,
+      pageNumber + 1
+    );
+
+    actions.createRedirect({
+      fromPath: oldPageCategoryPath,
+      toPath: categoryPath,
     });
   });
 };
@@ -86,8 +102,9 @@ const generatePaginatedBlogListPages = (
   const numPages = Math.ceil(allBlogPosts.length / BlogPostsPerPage);
 
   Array.from({ length: numPages }).forEach((_, pageNumber) => {
+    const blogListPath = RoutingUtil.getBlogListLink(pageNumber + 1);
     actions.createPage({
-      path: RoutingUtil.getBlogListLink(pageNumber + 1),
+      path: blogListPath,
       component: blogListTemplate,
       context: {
         limit: BlogPostsPerPage,
@@ -96,14 +113,75 @@ const generatePaginatedBlogListPages = (
         currentPage: pageNumber + 1,
       },
     });
+
+    // redirect from old page
+    const oldBlogListPath = RoutingUtil.getOldPageBlogListLink(pageNumber + 1);
+    actions.createRedirect({
+      fromPath: oldBlogListPath,
+      toPath: blogListPath,
+    });
   });
 };
 
-const createRedirects = (actions: CreatePagesArgs["actions"]) => {
+const createBlogPostRedirectsForOldPage = (
+  actions: CreatePagesArgs["actions"]
+) => {
   const redirects = [
+    {
+      from: "/2020/02/hello_world.html",
+      to: "/blog/hello-world",
+    },
+    {
+      from: "/2020/03/javascript_object_destructuring_for_better_functions.html",
+      to: "/blog/javascript-object-destructuring-for-better-functions",
+    },
+    {
+      from: "/2020/04/dockerizing_wordpress.html",
+      to: "/blog/dockerizing-wordpress",
+    },
+    {
+      from: "/2020/04/docker_swarm_spa_nginx_proxy.html",
+      to: "/blog/docker-swarm-spa-nginx-proxy",
+    },
+    {
+      from: "/2020/05/traefik-basic-setup.html",
+      to: "/blog/traefik-basic-setup",
+    },
     {
       from: "/2020/05/traefik-nodejs-api-and-db.html",
       to: "/blog/traefik-nodejs-api-and-db",
+    },
+    {
+      from: "/2020/05/traefik-nginx-proxy.html",
+      to: "/blog/traefik-nginx-proxy",
+    },
+    {
+      from: "/2020/05/traefik-s3-proxy.html",
+      to: "/blog/traefik-s3-proxy",
+    },
+    {
+      from: "/2020/11/mongodb-data-modelling-notes.html",
+      to: "/blog/mongodb-data-modelling-notes",
+    },
+    {
+      from: "/2020/11/mongodb-aggregation-framework-notes.html",
+      to: "/blog/mongodb-aggregation-framework-notes",
+    },
+    {
+      from: "/2020/11/traefik-ip-whitelist.html",
+      to: "/blog/traefik-ip-whitelist",
+    },
+    {
+      from: "/2021/11/the_return.html",
+      to: "/blog/the-return",
+    },
+    {
+      from: "/2021/11/i_am_not_afraid_to_not_know_things_anymore.html",
+      to: "/blog/i-am-not-afraid-to-not-know-things-anymore",
+    },
+    {
+      from: "/2021/12/keeping-a-positive-outlook.html",
+      to: "/blog/keeping-a-positive-outlook",
     },
   ];
 
@@ -135,5 +213,5 @@ export const createPages: GatsbyNode["createPages"] = async ({
   generateBlogPostPages((result.data as any).allPosts.nodes, actions);
   generatePaginatedBlogListPages((result.data as any).allPosts.nodes, actions);
 
-  createRedirects(actions);
+  createBlogPostRedirectsForOldPage(actions);
 };
