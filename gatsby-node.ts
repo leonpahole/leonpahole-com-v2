@@ -36,13 +36,8 @@ const generatePaginatedCategoryPage = (
   const numPages = Math.ceil(category.totalCount / BlogPostsPerPage);
 
   Array.from({ length: numPages }).forEach((_, pageNumber) => {
-    const categoryPath = RoutingUtil.getCategoryLink(
-      category.fieldValue,
-      pageNumber + 1
-    );
-
     actions.createPage({
-      path: categoryPath,
+      path: RoutingUtil.getCategoryLink(category.fieldValue, pageNumber + 1),
       component: categoryTemplate,
       context: {
         limit: BlogPostsPerPage,
@@ -51,17 +46,6 @@ const generatePaginatedCategoryPage = (
         currentPage: pageNumber + 1,
         category: category.fieldValue,
       },
-    });
-
-    // redirect for old page
-    const oldPageCategoryPath = RoutingUtil.getOldPageCategoryLink(
-      category.fieldValue,
-      pageNumber + 1
-    );
-
-    actions.createRedirect({
-      fromPath: oldPageCategoryPath,
-      toPath: categoryPath,
     });
   });
 };

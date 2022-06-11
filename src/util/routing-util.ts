@@ -3,20 +3,10 @@ export class RoutingUtil {
     return str.split(" ").join("-").toLowerCase();
   }
 
-  private static pascalCase(str: string) {
-    return str.split(" ").join("_").toLowerCase();
-  }
-
   static getCategoryLink(category: string, pageNumber: number) {
     return `/blog/categories/${this.kebabCase(
       category
     )}${this.getPageNumberQueryLink(pageNumber)}`;
-  }
-
-  static getOldPageCategoryLink(category: string, pageNumber: number) {
-    return `${this.pascalCase(category)}${this.getPageNumberQueryLink(
-      pageNumber
-    )}`;
   }
 
   static getBlogPostLink(slug: string) {
