@@ -13,7 +13,7 @@ cover_image:
   credit_link: "https://doc.traefik.io/traefik/"
 ---
 
-If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}). This blog post assumes you have this setup ready:
+If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2](/blog/traefik-basic-setup). This blog post assumes you have this setup ready:
 
 - HTTP to HTTPS redirect,
 - automated Let's encrypt certificates,
@@ -144,7 +144,7 @@ networks:
   backend:
 ```
 
-Note that we connect frontend, API and db admin to the external network, created by Traefik (we did that in the [previous blog post]({% post_url 2020-05-02-traefik-basic-setup %})). We also connect all backend containers into a network `backend`, to ensure the communication between them. Finally, we add either an IP whitelist, password protection, both or none to the database admin container to prevent unauthorized access.
+Note that we connect frontend, API and db admin to the external network, created by Traefik (we did that in the [previous blog post](/blog/traefik-basic-setup)). We also connect all backend containers into a network `backend`, to ensure the communication between them. Finally, we add either an IP whitelist, password protection, both or none to the database admin container to prevent unauthorized access.
 
 As a side node, you need to name each of your routers differently. Here I named the routers, associated with these containers, "simple-fe", "simple-be" and "simple-dba" respectively. If you have more containers you want to connect (you probably do), you should name them something else to prevent conflicts with these containers.
 
@@ -152,7 +152,7 @@ Also, no ports are exposed to the outside world, all the communication runs thro
 
 ### Important: about networks
 
-We use two networks here, `backend` and `traefik-global-proxy`. Traefik does not know, which network is the public network of Traefik and which one is the internal one, so we need to tell it this information. We can configure that globally in `traefik.toml` (we did that in the [previous blog post]({% post_url 2020-05-02-traefik-basic-setup %})):
+We use two networks here, `backend` and `traefik-global-proxy`. Traefik does not know, which network is the public network of Traefik and which one is the internal one, so we need to tell it this information. We can configure that globally in `traefik.toml` (we did that in the [previous blog post](/blog/traefik-basic-setup)):
 
 ```toml
 [providers.docker]
@@ -206,9 +206,9 @@ Also check if `https://db.simple.mydomain.com` security works correctly. If usin
 
 Check out my other examples of Traefik usage, if you are interested:
 
-- [Nginx proxy example]({% post_url 2020-05-02-traefik-nginx-proxy %}) - connect a basic Nginx proxy to Traefik.
-- [Proxy to S3 bucket example]({% post_url 2020-05-02-traefik-s3-proxy %}) - use Traefik as a reverse proxy to an S3 bucket (to serve a static site).
-- [IP whitelist example]({% post_url 2020-11-07-traefik-ip-whitelist %}) - allow only certain IP addresses to access selected Docker containers.
+- [Nginx proxy example](/blog/traefik-nginx-proxy) - connect a basic Nginx proxy to Traefik.
+- [Proxy to S3 bucket example](/blog/traefik-s3-proxy) - use Traefik as a reverse proxy to an S3 bucket (to serve a static site).
+- [IP whitelist example](/blog/traefik-ip-whitelist) - allow only certain IP addresses to access selected Docker containers.
 
 <p></p>
 

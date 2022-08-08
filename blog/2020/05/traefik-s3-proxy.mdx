@@ -13,7 +13,7 @@ cover_image:
   credit_link: "https://doc.traefik.io/traefik/"
 ---
 
-If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}). This blog post assumes you have this setup ready:
+If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2](/blog/traefik-basic-setup). This blog post assumes you have this setup ready:
 
 - HTTP to HTTPS redirect,
 - automated Let's encrypt certificates.
@@ -119,11 +119,11 @@ A [router](https://docs.traefik.io/routing/routers/) will accept a request from 
 Here is what we tell Traefik for this router in above code:
 
 - We name our router `mysite`. The names of routers are unique so make sure that you only have one router named `mysite`. I also recommend changing this name to something more explanatory, I use `mysite` only for demo purposes.
-- We tell the router to accept requests coming from the entrypoint `websecure`. We defined this entrypoint in the [previous blog post]({% post_url 2020-05-02-traefik-basic-setup %}) and it defines port 443.
+- We tell the router to accept requests coming from the entrypoint `websecure`. We defined this entrypoint in the [previous blog post](/blog/traefik-basic-setup) and it defines port 443.
 - We tell the router to use middleware `mysite-www` (described below). In short, this middleware will redirect non-www to www.
 - We tell the router to forward request to service `extmysite`, which will call our bucket. One again, the service name should be unique.
 - We tell the router to match and handle requests with URL `mydomain.com` or `www.mydomain.com`.
-- We tell the router to generate certificates for `www.mydomain.com` and `mydomain.com` using cert resolver `letsencrypt` (defined in the [previous blog post]({% post_url 2020-05-02-traefik-basic-setup %})).
+- We tell the router to generate certificates for `www.mydomain.com` and `mydomain.com` using cert resolver `letsencrypt` (defined in the [previous blog post](/blog/traefik-basic-setup)).
 
 <p></p>
 
@@ -148,7 +148,7 @@ We define a [service](https://docs.traefik.io/routing/services/) `extmysite` tha
 
 We define a [middleware](https://docs.traefik.io/middlewares/overview/) `mysite-www`, which redirects non-www requests to www using a simple regex. Be sure to substitute `mydomain.com` with your actual domain in the regex.
 
-Keep in mind that the configuration is based on the [base setup]({% post_url 2020-05-02-traefik-basic-setup %}), and thus contains names of entrypoints (`websecure`) and cert providers (`letsencrypt`), as defined in that setup. Be sure to substitute those, if using a different setup.
+Keep in mind that the configuration is based on the [base setup](/blog/traefik-basic-setup), and thus contains names of entrypoints (`websecure`) and cert providers (`letsencrypt`), as defined in that setup. Be sure to substitute those, if using a different setup.
 
 Make sure that DNS records for `www.mydomain.com` and `mydomain.com` point to your server, and then save the file. In a few moments, `www.mydomain.com` and `mydomain.com` will be available. You can check logs of Traefik to see how Traefik detected the configuration automatically and generated a certificate for it. **So, no restarts are needed!**
 
@@ -186,9 +186,9 @@ You should now get a response "forbidden" if you visit your bucket directly thro
 
 Check out my other examples of Traefik usage, if you are interested:
 
-- [Nginx proxy example]({% post_url 2020-05-02-traefik-nginx-proxy %}) - connect a basic Nginx proxy to Traefik.
-- [Full-stack Angular + Node.js + Postgres application example]({% post_url 2020-05-02-traefik-nodejs-api-and-db %}) - connect a typical full-stack application to Traefik.
-- [IP whitelist example]({% post_url 2020-11-07-traefik-ip-whitelist %}) - allow only certain IP addresses to access selected Docker containers.
+- [Nginx proxy example](/blog/traefik-nginx-proxy) - connect a basic Nginx proxy to Traefik.
+- [Full-stack Angular + Node.js + Postgres application example](/blog/traefik-nodejs-api-and-db) - connect a typical full-stack application to Traefik.
+- [IP whitelist example](/blog/traefik-ip-whitelist) - allow only certain IP addresses to access selected Docker containers.
 
 <p></p>
 

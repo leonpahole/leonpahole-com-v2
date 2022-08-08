@@ -15,7 +15,7 @@ cover_image:
 
 Security is an important consideration when building web based systems. A big part of this is giving access to critical resources to as few people as possible. For example, a lot of brute force attacks can be prevented if we limit SSH access to our server to only a handful of IP addresses (for instance, our VPN server and our office IP addresses). Same applies to dashboards and admin interfaces, such as database admin panels (pgAdmin, phpMyAdmin, Mongo express and others). If you use Traefik as your gateway to these dashboards, you can specify IP whitelists to give access to specific IP addresses or ranges. Let's look at how to do this.
 
-If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}). I will not cover `traefik.toml` setup from scratch in this blog post.
+If you haven't set up Traefik yet, check my previous blog post about the [base setup of Traefik v2](/blog/traefik-basic-setup). I will not cover `traefik.toml` setup from scratch in this blog post.
 
 ## Adding dynamic configuration to Traefik
 
@@ -54,7 +54,7 @@ Now, restart the system to apply the bind mount. This will also reload static co
 docker-compose up -d
 ```
 
-Check out my [base setup of Traefik v2]({% post_url 2020-05-02-traefik-basic-setup %}) for full `docker-compose.yml` and `traefik.toml` if you don't have them yet.
+Check out my [base setup of Traefik v2](/blog/traefik-basic-setup) for full `docker-compose.yml` and `traefik.toml` if you don't have them yet.
 
 <p></p>
 
@@ -132,9 +132,9 @@ This declares IP whitelist middleware `my-whitelist-in-docker` and applies it to
 
 Check out my other examples of Traefik usage, if you are interested:
 
-- [Nginx proxy example]({% post_url 2020-05-02-traefik-nginx-proxy %}) - connect a basic Nginx proxy to Traefik.
-- [Full-stack Angular + Node.js + Postgres application example]({% post_url 2020-05-02-traefik-nodejs-api-and-db %}) - connect a typical full-stack application to Traefik.
-- [Proxy to S3 bucket example]({% post_url 2020-05-02-traefik-s3-proxy %}) - use Traefik as a reverse proxy to an S3 bucket (to serve a static site).
+- [Nginx proxy example](/blog/traefik-nginx-proxy) - connect a basic Nginx proxy to Traefik.
+- [Full-stack Angular + Node.js + Postgres application example](/blog/traefik-nodejs-api-and-db) - connect a typical full-stack application to Traefik.
+- [Proxy to S3 bucket example](/blog/traefik-s3-proxy) - use Traefik as a reverse proxy to an S3 bucket (to serve a static site).
 
 <p></p>
 
