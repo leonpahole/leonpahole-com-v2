@@ -1,16 +1,10 @@
+import { faBolt, faBriefcase, faBullseye, faGraduationCap, faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SEO } from "components/seo/SEO";
+import { Link } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
 import "src/components/Page/HomePage/home-page.scss";
-import { StaticImage } from "gatsby-plugin-image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBriefcase,
-  faGraduationCap,
-  faHeart,
-  faLightbulb,
-  faMapMarkerAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link } from "gatsby";
-import { SEO } from "components/seo/SEO";
 
 export const HomePage = () => {
   return (
@@ -18,17 +12,11 @@ export const HomePage = () => {
       <SEO />
 
       <section className="home-page-section">
-        <StaticImage
-          className="personal-image"
-          alt="Leon Pahole"
-          src="../../../images/LeonPahole.png"
-        />
+        <StaticImage className="personal-image" alt="Leon Pahole" src="../../../images/LeonPahole.png" />
 
         <div className="greeting-container">
           <h1 className="greeting-title">Hi, I&apos;m Leon Pahole</h1>
-          <h2 className="greeting-subtitle">
-            Web developer &bull; computer science student
-          </h2>
+          <h2 className="greeting-subtitle">Full-stack web developer</h2>
         </div>
 
         <div className="navigation-container">
@@ -49,43 +37,25 @@ export const HomePage = () => {
 
         <div className="short-presentation-container">
           <p>
-            <FontAwesomeIcon
-              icon={faMapMarkerAlt}
-              className="short-presentation-icon"
-            />{" "}
-            I come from Maribor, Slovenia and I am 25 years old.
+            <FontAwesomeIcon icon={faBullseye} className="short-presentation-icon" /> My goal is to solve problems by
+            being the best version of myself, learning something new every day, improving my productivity, staying
+            healthy, and passing my knowledge to other people.
           </p>
           <p>
-            <FontAwesomeIcon
-              icon={faHeart}
-              className="short-presentation-icon"
-            />{" "}
-            I love anything related to computers.
+            <FontAwesomeIcon icon={faBriefcase} className="short-presentation-icon" /> I have 5 years of experience in
+            full-stack web development - frontend, backend, mobile, DevOps, cloud, and system administration.
           </p>
           <p>
-            <FontAwesomeIcon
-              icon={faGraduationCap}
-              className="short-presentation-icon"
-            />{" "}
-            I have a bachelors degree in computer science and information
-            technologies. I currently study for a masters degree at Faculty of
-            electrical engineering, computer science and informatics in Maribor.
+            <FontAwesomeIcon icon={faBolt} className="short-presentation-icon" /> I have experience in technical leading
+            of agile teams and project management.
           </p>
           <p>
-            <FontAwesomeIcon
-              icon={faBriefcase}
-              className="short-presentation-icon"
-            />{" "}
-            I am self-employed and currently work as a web developer, system
-            administator, devops engineer and cloud architect.
+            <FontAwesomeIcon icon={faGraduationCap} className="short-presentation-icon" /> I have a bachelor&apos;s
+            degree in computer science and information technologies.
           </p>
           <p>
-            <FontAwesomeIcon
-              icon={faLightbulb}
-              className="short-presentation-icon"
-            />{" "}
-            My current points of interest include cloud, devops, infrastructure
-            and machine learning.
+            <FontAwesomeIcon icon={faLightbulb} className="short-presentation-icon" /> My other points of interest
+            include algorithms & data structures and security.
           </p>
           <br />
           <p>
