@@ -24,9 +24,7 @@ const BlogPost: React.FC<IProps> = ({ data }) => {
         title={blogPost.title}
         description={blogPost.excerpt}
         article
-        image={
-          blogPost.coverImage?.src ? getSrc(blogPost.coverImage.src) : undefined
-        }
+        image={blogPost.coverImage?.src ? getSrc(blogPost.coverImage.src) : undefined}
       />
       <BlogPostItem post={blogPost} />
     </Layout>
@@ -46,7 +44,7 @@ export const blogPostQuery = graphql`
           credit_text
           src {
             childImageSharp {
-              gatsbyImageData
+              gatsbyImageData(layout: FIXED)
             }
           }
         }
