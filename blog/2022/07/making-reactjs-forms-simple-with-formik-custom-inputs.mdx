@@ -914,7 +914,7 @@ import { TextInput, TextInputProps } from "./TextInput";
 export const FormikTextInput: React.FC<TextInputProps> = (props) => {
   const [field, meta] = useField(props.name);
   return (
-    <TextInput id={field.name} {...field} {...props} errorText={meta.error} />
+    <TextInput id={field.name} {...field} {...props} errorText={meta.touched ? meta.error : undefined} />
   );
 };
 ```
@@ -951,7 +951,7 @@ import { Dropdown, DropdownProps } from "./Dropdown";
 export const FormikDropdown: React.FC<DropdownProps> = (props) => {
   const [field, meta] = useField(props.name);
   return (
-    <Dropdown id={field.name} {...field} {...props} errorText={meta.error} />
+    <Dropdown id={field.name} {...field} {...props} errorText={meta.touched ? meta.error : undefined} />
   );
 };
 ```
@@ -990,7 +990,7 @@ export const FormikRatingInput: React.FC<RatingInputProps> = (props) => {
         setValue(rating);
       }}
       {...props}
-      errorText={meta.error}
+      errorText={meta.touched ? meta.error : undefined}
     />
   );
 };
