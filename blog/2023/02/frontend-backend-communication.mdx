@@ -18,7 +18,7 @@ cover_image:
 At the core of every front-end web app is integration with the server. This involves the following processes:
 
 - Calling the server endpoint
-- Handling potential errors
+- Handling potential errors (update: here's the error handling blog post: [How I handle frontend errors](/blog/how-i-handle-frontend-errors))
 - Converting the data from the server to the structure used on the front-end and validating it (if needed)
 
 When I write front-end code, I like to abstract things as much as possible so the logic for the communication with the server is not in the UI components. In addition, I like to group related endpoint calls and models by domain. This makes the code easier to read and maintain.
@@ -125,6 +125,8 @@ Another thing to note is that the names of all of the functions in the `api` are
 ### The errors
 
 The `<domain>.errors.ts` file contains the logic and entities that are used when communicating with the server goes wrong. Because error handling is a complex topic itself, I will write a separate blog post covering how I handle errors. However, if you use your own system of handling errors, the `errors` file would be the place to store the logic for this system (under a `namespace`).
+
+Update: here's the error handling blog post: [How I handle frontend errors](/blog/how-i-handle-frontend-errors).
 
 ### The service
 
@@ -288,5 +290,7 @@ const { data: blogPosts, isLoading, error } = BlogPostQueries.useList();
 In this blog post, I went over the service-models-api-errors(-queries) structure that I use in every front-end project that I start. I like working with this structure because it makes things simpler and more manageable. However, I think that every team should adapt their structure to whatever makes them the most productive - hopefully, this blog post has motivated you to do just that.
 
 Stay tuned for my error handling blog post, which will delve into the details of error handling using this structure.
+
+Update: here's the error handling blog post: [How I handle frontend errors](/blog/how-i-handle-frontend-errors).
 
 Thanks for reading!
