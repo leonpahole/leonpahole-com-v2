@@ -37,31 +37,11 @@ export const SignupForm: React.FC = () => {
 
   return (
     <form onSubmit={onFormSubmit}>
-      <input
-        type="text"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="text"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-      />
-      <input
-        type="text"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input
-        type="password"
-        value={passwordConfirmation}
-        onChange={(e) => setPasswordConfirmation(e.target.value)}
-      />
+      <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+      <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input type="password" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} />
       <button type="submit">Submit</button>
     </form>
   );
@@ -152,10 +132,7 @@ import React from "react";
 import "./TextInput.css";
 
 // default HTML props for an input
-type BuiltInTextInputProps = React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
+type BuiltInTextInputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 // custom props for custom functionality of the input
 interface CustomTextInputProps {
@@ -170,21 +147,11 @@ interface CustomTextInputProps {
 export type TextInputProps = BuiltInTextInputProps & CustomTextInputProps;
 
 export const TextInput: React.FC<TextInputProps> = (props) => {
-  const {
-    label,
-    errorText,
-    helpText,
-    onKeyDownEnter,
-    onChangeText,
-    ...inputProps
-  } = props;
+  const { label, errorText, helpText, onKeyDownEnter, onChangeText, ...inputProps } = props;
   const hasError = errorText != null;
 
   return (
-    <label
-      htmlFor={inputProps.id || inputProps.name}
-      className="text-input-label"
-    >
+    <label htmlFor={inputProps.id || inputProps.name} className="text-input-label">
       {label}
       <input
         {...inputProps}
@@ -207,9 +174,7 @@ export const TextInput: React.FC<TextInputProps> = (props) => {
       />
       <div className="text-input-bottom-text-container">
         {helpText && <span className="text-input-help-text">{helpText}</span>}
-        {errorText && (
-          <span className="text-input-error-text">{errorText}</span>
-        )}
+        {errorText && <span className="text-input-error-text">{errorText}</span>}
       </div>
     </label>
   );
@@ -234,10 +199,7 @@ You'll notice no imports related to Formik. This component has no idea it will b
 
 ```tsx
 // default HTML props for an input
-type BuiltInTextInputProps = React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
+type BuiltInTextInputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 // custom props for custom functionality of the input
 interface CustomTextInputProps {
@@ -263,14 +225,7 @@ You'll notice that we also specify `name` here, even though the `BuiltInTextInpu
 Finally, we also define some utility functions: `onKeyDownEnter` that fires when enter is pressed in the input (we don't actually need this anywhere, but it's showcased here) and the `onChangeText`, which makes it easy to get the input's text without having to write `e.target.value`.
 
 ```tsx
-const {
-  label,
-  errorText,
-  helpText,
-  onKeyDownEnter,
-  onChangeText,
-  ...inputProps
-} = props;
+const { label, errorText, helpText, onKeyDownEnter, onChangeText, ...inputProps } = props;
 ```
 
 We split the props between custom and built-in ones using destruction. This is useful so we don't have to manually specify each prop for the input - instead, we'll spread it into the input like this:
@@ -335,10 +290,7 @@ import React from "react";
 import "./Dropdown.css";
 
 // default HTML props for an input
-type BuiltInDropdownProps = React.DetailedHTMLProps<
-  React.SelectHTMLAttributes<HTMLSelectElement>,
-  HTMLSelectElement
->;
+type BuiltInDropdownProps = React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
 
 export interface DropdownOption {
   title: string;
@@ -371,10 +323,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
   const hasError = errorText != null;
 
   return (
-    <label
-      htmlFor={dropdownProps.id || dropdownProps.name}
-      className="dropdown-label"
-    >
+    <label htmlFor={dropdownProps.id || dropdownProps.name} className="dropdown-label">
       {label}
       <select
         {...dropdownProps}
@@ -437,9 +386,7 @@ interface CustomTextInputProps {
   onChangeText?(text: string): void;
 }
 
-export type TextInputProps = BuiltInTextInputProps &
-  SharedInputProps &
-  CustomTextInputProps;
+export type TextInputProps = BuiltInTextInputProps & SharedInputProps & CustomTextInputProps;
 
 // dropdown
 interface CustomDropdownProps {
@@ -447,9 +394,7 @@ interface CustomDropdownProps {
   onSelectOption?(option: any): void;
 }
 
-export type DropdownProps = BuiltInDropdownProps &
-  SharedInputProps &
-  CustomDropdownProps;
+export type DropdownProps = BuiltInDropdownProps & SharedInputProps & CustomDropdownProps;
 ```
 
 - Declaring a shared `InputWrapper` component for all of the duplicated code inside `src/components/inputs/shared` folder (also notice how we reuse `SharedInputProps`)
@@ -461,14 +406,7 @@ import "./SharedInputStyles.css";
 
 type IProps = SharedInputProps & { id?: string; children?: React.ReactNode };
 
-export const InputWrapper: React.FC<IProps> = ({
-  label,
-  id,
-  name,
-  errorText,
-  helpText,
-  children,
-}) => (
+export const InputWrapper: React.FC<IProps> = ({ label, id, name, errorText, helpText, children }) => (
   <label htmlFor={id || name} className="input-label">
     {label}
     {children}
@@ -491,10 +429,7 @@ import { InputWrapper } from "../shared/InputWrapper";
 import { SharedInputProps } from "../shared/SharedInputProps";
 
 // default HTML props for an input
-type BuiltInTextInputProps = React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
+type BuiltInTextInputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 // custom props for custom functionality of the input
 interface CustomTextInputProps {
@@ -502,29 +437,14 @@ interface CustomTextInputProps {
   onChangeText?(text: string): void;
 }
 
-export type TextInputProps = BuiltInTextInputProps &
-  SharedInputProps &
-  CustomTextInputProps;
+export type TextInputProps = BuiltInTextInputProps & SharedInputProps & CustomTextInputProps;
 
 export const TextInput: React.FC<TextInputProps> = (props) => {
-  const {
-    label,
-    errorText,
-    helpText,
-    onKeyDownEnter,
-    onChangeText,
-    ...inputProps
-  } = props;
+  const { label, errorText, helpText, onKeyDownEnter, onChangeText, ...inputProps } = props;
   const hasError = errorText != null;
 
   return (
-    <InputWrapper
-      id={inputProps.id}
-      name={inputProps.name}
-      label={label}
-      helpText={helpText}
-      errorText={errorText}
-    >
+    <InputWrapper id={inputProps.id} name={inputProps.name} label={label} helpText={helpText} errorText={errorText}>
       <input
         {...inputProps}
         onKeyDown={(e) => {
@@ -659,13 +579,9 @@ interface SignupFormValues {
 }
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Please enter a valid email address.")
-    .required("Please enter your email."),
+  email: Yup.string().email("Please enter a valid email address.").required("Please enter your email."),
   fullName: Yup.string().required("Please enter your full name."),
-  password: Yup.string()
-    .required("Please enter your password.")
-    .min(7, "Password must be at least 7 characters long."),
+  password: Yup.string().required("Please enter your password.").min(7, "Password must be at least 7 characters long."),
   passwordConfirmation: Yup.string()
     .required("Please confirm your password.")
     .oneOf([Yup.ref("password"), null], "Passwords don't match."),
@@ -695,16 +611,7 @@ export const SignupForm: React.FC = () => (
         }, 500);
       }}
     >
-      {({
-        isSubmitting,
-        values,
-        touched,
-        handleChange,
-        handleBlur,
-        setFieldTouched,
-        setFieldValue,
-        errors,
-      }) => (
+      {({ isSubmitting, values, touched, handleChange, handleBlur, setFieldTouched, setFieldValue, errors }) => (
         <Form className="signup-form">
           <TextInput
             name="email"
@@ -725,9 +632,7 @@ export const SignupForm: React.FC = () => (
             value={values.fullName}
             onChange={handleChange}
             onBlur={handleBlur}
-            errorText={
-              touched.fullName && errors.fullName ? errors.fullName : undefined
-            }
+            errorText={touched.fullName && errors.fullName ? errors.fullName : undefined}
           />
 
           <TextInput
@@ -738,9 +643,7 @@ export const SignupForm: React.FC = () => (
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
-            errorText={
-              touched.password && errors.password ? errors.password : undefined
-            }
+            errorText={touched.password && errors.password ? errors.password : undefined}
           />
 
           <TextInput
@@ -752,9 +655,7 @@ export const SignupForm: React.FC = () => (
             onChange={handleChange}
             onBlur={handleBlur}
             errorText={
-              touched.passwordConfirmation && errors.passwordConfirmation
-                ? errors.passwordConfirmation
-                : undefined
+              touched.passwordConfirmation && errors.passwordConfirmation ? errors.passwordConfirmation : undefined
             }
           />
 
@@ -766,9 +667,7 @@ export const SignupForm: React.FC = () => (
             value={values.gender}
             onChange={handleChange}
             onBlur={handleBlur}
-            errorText={
-              touched.gender && errors.gender ? errors.gender : undefined
-            }
+            errorText={touched.gender && errors.gender ? errors.gender : undefined}
           />
 
           <RatingInput
@@ -780,9 +679,7 @@ export const SignupForm: React.FC = () => (
             value={values.rating}
             onSelect={(rating) => setFieldValue("rating", rating)}
             onBlur={() => setFieldTouched("rating")}
-            errorText={
-              touched.rating && errors.rating ? errors.rating : undefined
-            }
+            errorText={touched.rating && errors.rating ? errors.rating : undefined}
           />
 
           <button
@@ -814,13 +711,9 @@ interface SignupFormValues {
 }
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Please enter a valid email address.")
-    .required("Please enter your email."),
+  email: Yup.string().email("Please enter a valid email address.").required("Please enter your email."),
   fullName: Yup.string().required("Please enter your full name."),
-  password: Yup.string()
-    .required("Please enter your password.")
-    .min(7, "Password must be at least 7 characters long."),
+  password: Yup.string().required("Please enter your password.").min(7, "Password must be at least 7 characters long."),
   passwordConfirmation: Yup.string()
     .required("Please confirm your password.")
     .oneOf([Yup.ref("password"), null], "Passwords don't match."),
@@ -913,9 +806,7 @@ import { TextInput, TextInputProps } from "./TextInput";
 
 export const FormikTextInput: React.FC<TextInputProps> = (props) => {
   const [field, meta] = useField(props.name);
-  return (
-    <TextInput id={field.name} {...field} {...props} errorText={meta.touched ? meta.error : undefined} />
-  );
+  return <TextInput id={field.name} {...field} {...props} errorText={meta.touched ? meta.error : undefined} />;
 };
 ```
 
@@ -950,21 +841,14 @@ import { Dropdown, DropdownProps } from "./Dropdown";
 
 export const FormikDropdown: React.FC<DropdownProps> = (props) => {
   const [field, meta] = useField(props.name);
-  return (
-    <Dropdown id={field.name} {...field} {...props} errorText={meta.touched ? meta.error : undefined} />
-  );
+  return <Dropdown id={field.name} {...field} {...props} errorText={meta.touched ? meta.error : undefined} />;
 };
 ```
 
 And here is how we use it in the form:
 
 ```tsx
-<FormikDropdown
-  name="gender"
-  label="Gender"
-  selectOptionText="Select your gender..."
-  options={genderDropdownOptions}
-/>
+<FormikDropdown name="gender" label="Gender" selectOptionText="Select your gender..." options={genderDropdownOptions} />
 ```
 
 Amazing! 🎉
@@ -1033,13 +917,9 @@ interface SignupFormValues {
 }
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Please enter a valid email address.")
-    .required("Please enter your email."),
+  email: Yup.string().email("Please enter a valid email address.").required("Please enter your email."),
   fullName: Yup.string().required("Please enter your full name."),
-  password: Yup.string()
-    .required("Please enter your password.")
-    .min(7, "Password must be at least 7 characters long."),
+  password: Yup.string().required("Please enter your password.").min(7, "Password must be at least 7 characters long."),
   passwordConfirmation: Yup.string()
     .required("Please confirm your password.")
     .oneOf([Yup.ref("password"), null], "Passwords don't match."),
@@ -1079,18 +959,9 @@ export const SignupForm: React.FC = () => (
             placeholder="Enter your email..."
           />
 
-          <FormikTextInput
-            name="fullName"
-            label="Full name"
-            placeholder="Enter your full name..."
-          />
+          <FormikTextInput name="fullName" label="Full name" placeholder="Enter your full name..." />
 
-          <FormikTextInput
-            name="password"
-            label="Password"
-            type="password"
-            placeholder="Enter a strong password..."
-          />
+          <FormikTextInput name="password" label="Password" type="password" placeholder="Enter a strong password..." />
 
           <FormikTextInput
             name="passwordConfirmation"
